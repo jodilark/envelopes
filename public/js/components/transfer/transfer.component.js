@@ -1,5 +1,5 @@
 angular.module('billbo').component('transferModal', {
-    templateUrl: '../public/js/components/transfer/transferModal.html',
+    templateUrl: '../js/components/transfer/transferModal.html',
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory, _, balances){
         var from;

@@ -2,7 +2,7 @@ angular.module('billbo').component('envelope', {
     bindings:{
         env: '<'
     },
-    templateUrl:'../public/js/components/envelope/envelope.html',
+    templateUrl:'../js/components/envelope/envelope.html',
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory){
         $scope.delete = envelopeFactory.deleteEnvelope;

@@ -1,5 +1,5 @@
 angular.module('billbo').component('makePurchaseModal', {
-    templateUrl: '../public/js/components/purchase/makePurchaseModal.html',
+    templateUrl: '../js/components/purchase/makePurchaseModal.html',
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory, _, balances, store){
         var from;
