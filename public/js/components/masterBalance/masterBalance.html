@@ -1,0 +1,16 @@
+<main id="modal">
+    <content>
+        <section id="edit-balance-modal-wrapper">
+            {{envelopes.length}}
+            <form id="mbTransfer" name="mbTransfer" ng-submit="submit()">
+                <article>
+                    <input type="money" ng-model="mbTransfer.value" name="transferValue" placeholder="0.00"/>
+                </article>
+                <article>
+                    <button type="submit">Complete</button>
+                    <button ng-click="closeModal()">Cancel</button>
+                </article>
+            </form>
+        </section>
+    </content>
+</main>

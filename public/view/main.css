@@ -1,0 +1,128 @@
+body {
+    color: white;
+    background: black;
+}
+
+h1 {
+    margin-bottom: unset;
+}
+
+div.env-wrapper {
+    width: 188px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 30px 50px;
+    border: 1px solid white;
+}
+div.env-wrapper > .env-modal-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    color: rgb(244, 250, 253);
+    text-transform: uppercase;
+}
+
+div.closing_x {
+    cursor:pointer;
+}
+
+button {
+    background: blue;
+    color: white;
+}
+
+div.env-wrapper > .env-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0px 10px;
+    background: rgb(244, 250, 253);
+    color: rgb(61, 61, 61);
+}
+div#envelope_list{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, 188px);
+    grid-template-rows: repeat(auto-fill, 90px);
+    height: 282px;
+    border: 1px solid red;
+    overflow-y: scroll;
+}
+
+main#modal {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(100,100,100,0.5);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+main#modal content {
+    position: relative;
+    margin: 200px auto;
+    width: 284px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+}
+
+section#edit-balance-modal-wrapper article {
+    display: inline-block;
+    margin: 10px;
+    color: black;
+}
+
+option {
+    color: black;
+}
+#history {
+    overflow-x: scroll;
+}
+#history > article {
+    min-width: 599px;
+    border: 1px solid white;
+    display: grid;
+    grid-template-rows: fit-content(100%);
+    grid-template-columns: 0fr .5fr 0fr .4fr 1fr 0fr;
+}
+
+section#history > article#gridHeader {
+    background: rgb(22, 142, 255);
+}
+
+#history > article:nth-child(odd) {
+    background: rgb(116, 178, 207);
+}
+
+#history > article:nth-child(even) {
+    background: rgb(147, 188, 207);
+}
+
+#history > article > label{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+}
+
+#history > article > span{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255,0.2);
+}
+
+#history > article > span:nth-child(3){
+    min-width: 53px;
+}
+
+#history > article > span:nth-child(1){
+    min-width: 13px;
+}

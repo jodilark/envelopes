@@ -1,0 +1,22 @@
+<main id="modal">
+    <content>
+        <section id="edit-balance-modal-wrapper">
+            {{envelopes.length}}
+            <form id="{{formId}}" name="{{formId}}" ng-submit="submit()">
+                <article>
+                    <select ng-model="fromEnvelope" ng-change="onChange()" ng-options="envelope.titleValue + ':     ' + envelope.amountValue for envelope in envelopes">
+                        <option required value="">----- From -----</option>
+                    </select>
+                    <input type="money" required ng-model="fromFValue" name="fromValue" placeholder="0.00"/>
+                </article>
+                <article>
+                    <input type="text" required ng-model="info" name="infoName" placeholder="Description"/>
+                </article>
+                <article>
+                    <button type="submit">Add</button>
+                    <button ng-click="closeModal()">Cancel</button>
+                </article>
+            </form>
+        </section>
+    </content>
+</main>

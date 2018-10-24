@@ -1,0 +1,15 @@
+<main id="modal">
+    <content>
+        <section id="edit-balance-modal-wrapper">
+            <form id="faddBalance" name="faddBalance" ng-submit="submitBalance(addBalance)">
+                <article>
+                    <input type="money" ng-model="addBalance" name="addBalance" placeholder="0.00"/>
+                </article>
+                <article>
+                    <button type="submit">Add</button>
+                    <button ng-click="closeModal()">Cancel</button>
+                </article>
+            </form>
+        </section>
+    </content>
+</main>
