@@ -23,6 +23,12 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         });
     };
 
+    $scope.test = function(){
+        store.createData(store.data).then(function(res){
+            console.log(res);
+        })
+    }
+
     $scope.createEnvelope = function(){
         envelopeFactory.createEnvelope($scope.fdata, 'fdata').then(function(res){
             $scope.envelopes = res;
