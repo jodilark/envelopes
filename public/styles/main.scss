@@ -1,6 +1,6 @@
 body {
     color: white;
-    background: black;
+    background: rgb(94, 96, 107);
 }
 
 h1 {
@@ -39,8 +39,8 @@ div.env-wrapper > .env-body {
     justify-content: flex-end;
     align-items: center;
     padding: 0px 10px;
-    background: rgb(244, 250, 253);
-    color: rgb(61, 61, 61);
+    background: #000000b6;
+    color: rgb(244, 250, 253);
 }
 div#envelope_list{
     display: grid;
@@ -48,8 +48,9 @@ div#envelope_list{
     grid-template-columns: repeat(auto-fill, 188px);
     grid-template-rows: repeat(auto-fill, 90px);
     height: 282px;
-    border: 1px solid red;
+    border: 1px solid #000000b6;
     overflow-y: scroll;
+    background: rgb(31, 31, 31);
 }
 
 main#modal {

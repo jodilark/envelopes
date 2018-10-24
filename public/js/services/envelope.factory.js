@@ -37,7 +37,8 @@ function envelopeFactory($q, balances, store){
     }
 
     function updateEnvelope(data){
-        var valueFrom = Number(data.value.from),
+        var originalMasterBalance,
+        valueFrom = Number(data.value.from),
         fromEnvelopeIndex = _.indexOf(envelopes, data.fromEnvelope),
         toEnvelopeIndex = _.indexOf(envelopes, data.toEnvelope),
         newFromBalance = envelopes[fromEnvelopeIndex].amountValue - valueFrom,
