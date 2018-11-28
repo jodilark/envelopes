@@ -6,6 +6,7 @@ function store($q, $http){
         data.envelopes.length = 0;
         data.masterBalance = 2000;
         data.uniqueId = 1;
+        $http.get('/reset');
         return $q.resolve();
     }
 

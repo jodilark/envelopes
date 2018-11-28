@@ -1,5 +1,5 @@
 angular.module('billbo').factory('envelopeFactory', envelopeFactory);
-function envelopeFactory($q, balances, store){
+function envelopeFactory($q, balances, store, $http){
     var envelopes = store.data.envelopes, $scope, $rootScope;
 
     class Envelope{
@@ -27,13 +27,20 @@ function envelopeFactory($q, balances, store){
       }
 
     function getEnvelopes(){
-        return $q.resolve(envelopes);
+        return $http.get('/api/getEnvelopes');
     }
 
     function createEnvelope(data, form){
         envelopes.push(new Envelope(data)); 
         document.getElementById(form).reset();
-        return $q.resolve(envelopes);
+        return $http({
+            url: '/api/createEnvelope'
+            , method: 'POST'
+            , data: new Envelope(data)
+        }).then(response => {
+            console.log("success from server: ", response.data);
+            return $http.get('/api/getEnvelopes');
+        });
     }
 
     function updateEnvelope(data){
@@ -63,13 +70,19 @@ function envelopeFactory($q, balances, store){
     function deleteEnvelope(data){
         var elist;
         getEnvelopes().then(res => {
-            elist = res;
-            var envelopeToDelete = _.indexOf(elist, data);
-            if(data.titleValue !== 'Master Balance' && elist.length >= 1){
-                balances.update(elist[envelopeToDelete].amountValue, 'add');
+            elist = res.data;
+            var envelopeToDelete = _.find(elist, data);
+            var indexOfEnvelope;
+            _.forEach(elist, function(e, i){
+                if(e.title_value === data.title_value){
+                    indexOfEnvelope = i;
+                }
+            });
+            if(data.title_value !== 'Master Balance' && elist.length >= 1){
+                balances.update(envelopeToDelete.amount_value, 'add');
             }
             $rootScope.$broadcast('closeModal');
-            elist.splice(envelopeToDelete,1);
+            elist.splice(indexOfEnvelope,1);
         });
     }
 

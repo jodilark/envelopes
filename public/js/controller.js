@@ -12,7 +12,7 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
 
     $scope.reset = function(){
         envelopeFactory.getEnvelopes().then(function(res){
-            _.forEach(res, function(e){
+            _.forEach(res.data, function(e){
                 envelopeFactory.deleteEnvelope(e);
             })
             store.resetAll().then(function(){
@@ -28,10 +28,13 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
             console.log(res);
         })
     }
+    envelopeFactory.getEnvelopes().then(res => {
+        $scope.envelopes = res.data;
+    });
 
     $scope.createEnvelope = function(){
         envelopeFactory.createEnvelope($scope.fdata, 'fdata').then(function(res){
-            $scope.envelopes = res;
+            $scope.envelopes = res.data;
         });
     };
 });
