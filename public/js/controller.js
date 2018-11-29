@@ -22,15 +22,19 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
             });
         });
     };
-
+    
     $scope.test = function(){
         store.createData(store.data).then(function(res){
             console.log(res);
         })
     }
-    envelopeFactory.getEnvelopes().then(res => {
-        $scope.envelopes = res.data;
-    });
+    $scope.getEnvelopeList = function(){
+        envelopeFactory.getEnvelopes().then(res => {
+            $scope.envelopes = res.data;
+        });
+    };
+    $scope.getEnvelopeList();
+    $scope.$on('updateEnvelopes', $scope.getEnvelopeList);
 
     $scope.createEnvelope = function(){
         envelopeFactory.createEnvelope($scope.fdata, 'fdata').then(function(res){

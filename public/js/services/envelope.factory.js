@@ -12,7 +12,6 @@ function envelopeFactory($q, balances, store, $http){
                 g: Math.floor(Math.random() * Math.floor(255)),
                 b: Math.floor(Math.random() * Math.floor(255))
             };
-            this.id = getRandomInt(0, 9999999).toString();
         }
 
         formData(){
@@ -20,18 +19,11 @@ function envelopeFactory($q, balances, store, $http){
         }
     }
 
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-      }
-
     function getEnvelopes(){
         return $http.get('/api/getEnvelopes');
     }
 
     function createEnvelope(data, form){
-        envelopes.push(new Envelope(data)); 
         document.getElementById(form).reset();
         return $http({
             url: '/api/createEnvelope'
@@ -68,21 +60,18 @@ function envelopeFactory($q, balances, store, $http){
     }
     
     function deleteEnvelope(data){
-        var elist;
         getEnvelopes().then(res => {
-            elist = res.data;
-            var envelopeToDelete = _.find(elist, data);
-            var indexOfEnvelope;
-            _.forEach(elist, function(e, i){
+            var envelopeToDelete = _.find(res.data, function(e){
                 if(e.title_value === data.title_value){
-                    indexOfEnvelope = i;
+                    return e;
                 }
             });
-            if(data.title_value !== 'Master Balance' && elist.length >= 1){
+            if(data.title_value !== 'Master Balance' && res.data.length >= 1){
                 balances.update(envelopeToDelete.amount_value, 'add');
             }
             $rootScope.$broadcast('closeModal');
-            elist.splice(indexOfEnvelope,1);
+            $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id);
+            $rootScope.$broadcast('updateEnvelopes');
         });
     }
 

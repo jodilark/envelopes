@@ -1,6 +1,6 @@
 -- SCHEMA DELETE
 	DROP TABLE IF EXISTS envelopes CASCADE;
--- USERS
+-- ENVELOPES
 	CREATE TABLE IF NOT EXISTS envelopes
 	(
 		id serial primary key
@@ -11,3 +11,15 @@
 		, color_g int
 		, color_b int
 	);
+	INSERT INTO envelopes
+    (
+        title_value, 
+        amount_value, 
+        visible, 
+        color_r, 
+        color_g, 
+        color_b
+    )
+    VALUES
+    ('Master Balance', 2000, false, null, null, null)
+	;
