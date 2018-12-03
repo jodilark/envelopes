@@ -8,9 +8,12 @@ angular.module('billbo').component('masterBalanceModal', {
            $scope.$root.$broadcast('closeModal', 'masterBalanceModal');
        };
 
-    $scope.closeModal = function(){
-        document.getElementById('mbTransfer').reset();
-        $scope.$root.$broadcast('closeModal', 'masterBalanceModal');
-    }
+       var el = document.getElementById('m_balance_input');
+       el.focus();
+
+        $scope.closeModal = function(){
+            document.getElementById('mbTransfer').reset();
+            $scope.$root.$broadcast('closeModal', 'masterBalanceModal');
+        }
     }
 })
