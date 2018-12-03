@@ -1,26 +1,18 @@
 angular.module('billbo').component('transferModal', {
     templateUrl: '../js/components/transfer/transferModal.html',
     controllerAs: 'vm',
-    controller: function($scope, envelopeFactory, _, balances){
+    controller: function($scope, envelopeFactory, _, balances, store){
         var from;
-        envelopeFactory.getEnvelopes().then(function(res){
-            if(!res.amountValue){
-                res.amountValue = '0.00';
-            } else if(res.amountValue === '0.00') {
-                res.amountValue = Number(res.amountValue);
-            }
-            
-            if(res[0].titleValue !== 'Master Balance'){
-                res.unshift({ titleValue: 'Master Balance', amountValue: balances.getBalance()});
-            } else {
-                res[0].amountValue = balances.getBalance();
-            }
-            $scope.envelopes = res.filter(function(e, i){
-                if(e.amountValue){
+        store.getEnvelopes().then(function(res){
+            $scope.envelopes = res.data.filter(function(e, i){
+                if(Number(e.amount_value) > 0){
+                    if(typeof e.amount_value !== 'number'){
+                        e.amount_value = Number(e.amount_value);
+                    }
                     return e;
                 }
             });
-            from = res;
+            from = res.data;
         });
 
          // html template condensing code
@@ -37,7 +29,7 @@ angular.module('billbo').component('transferModal', {
         }
         $scope.onChange = function(){
             $scope.toEnvelopes = from.filter(function(e, i, arr){
-                if(e.titleValue !== $scope.fromEnvelope.titleValue){
+                if(e.title_value !== $scope.fromEnvelope.title_value){
                     return e
                 }
             })
@@ -49,16 +41,11 @@ angular.module('billbo').component('transferModal', {
         // end
 
         $scope.submit = function(){
-            // html template condensing code
-            $scope[$scope.formId].value = {from: $scope.fromFValue};
-            $scope[$scope.formId].fromEnvelope = $scope.fromEnvelope;
-            // end
-            envelopeFactory.updateEnvelope($scope[$scope.formId]);
-            envelopeFactory.getEnvelopes().then(function(res){
-                $scope.envelopes = res;
-                $scope.toEnvelopes = res;
-                $scope.closeModal();
-            })
+            let from = $scope.fromEnvelope.id, 
+                to = $scope[$scope.formId].toEnvelope.id, 
+                amount = Number($scope.fromFValue);
+            // [FromAccountId, ToAccountId, Amount]
+            store.transferBalance(from, to, amount).then(response => $scope.closeModal());
         }
     }
 })

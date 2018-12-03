@@ -29,6 +29,7 @@ app.post('/api/createEnvelope', crud.create);
 app.get('/api/envelope', crud.envelope);
 app.get('/api/getEnvelopes', crud.getEnvelopes);
 app.put('/api/updateEnvelope', crud.updateEnvelope);
+app.put('/api/transferBalance', crud.transferBalance);
 app.delete('/api/deleteEnvelope', crud.deleteEnvelope);
   
 

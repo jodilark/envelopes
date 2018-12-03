@@ -51,6 +51,10 @@ exports.updateEnvelope = (req, res) => {
         } else req.app.get('db').envelopeUpdate(upEnv).then(response => res.status(200).send(`Envelope ${upEnv[1]} was updated successfully`)).catch(err => res.status(400).send(`there was an error updating ${env[0]}: ${env[1]}, ${err}`));
     }).catch(err => res.status(400).send(`there was an error getting this envelope ${err}`));
 };
+exports.transferBalance = (req, res) => {
+    // [FromAccountId, ToAccountId, Amount]
+    req.app.get('db').transferBalance(req.body['0'], req.body['1'], req.body['2']).then(response => res.status(200).send('transaction complete')).catch(err => res.status(400).send(`Transaction did not complete: ${err}`));
+}
 // DELETE
 exports.deleteEnvelope = (req, res) => {
     if(!req.query.id) return res.status(404).send(`you didn't specify an id of the envelope to delete.`);

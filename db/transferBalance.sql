@@ -1,0 +1,1 @@
+select TransferBalance($1, $2, $3);

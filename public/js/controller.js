@@ -1,12 +1,15 @@
 angular.module('billbo').controller('main', function($scope, balances, _, envelopeFactory, store){
     envelopeFactory.passScope($scope);
-    $scope.balance = balances.getBalance();
-
+    $scope.$on('updateDom', function(){
+        let master = _.find(store.data.envelopes, {id:1});
+        $scope.balance = Number(master.amount_value);
+        $scope.envelopes = store.data.envelopes;
+    });
+    
     $scope.showModal = function(visibility, modal){
         $scope[modal] = visibility;
     }
     $scope.$on('closeModal', function(context, modal){
-        $scope.balance = balances.getBalance();
         $scope[modal] = false;
     });
 
@@ -28,13 +31,6 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
             console.log(res);
         })
     }
-    $scope.getEnvelopeList = function(){
-        envelopeFactory.getEnvelopes().then(res => {
-            $scope.envelopes = res.data;
-        });
-    };
-    $scope.getEnvelopeList();
-    $scope.$on('updateEnvelopes', $scope.getEnvelopeList);
 
     $scope.createEnvelope = function(){
         envelopeFactory.createEnvelope($scope.fdata, 'fdata').then(function(res){

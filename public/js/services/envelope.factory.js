@@ -19,10 +19,6 @@ function envelopeFactory($q, balances, store, $http){
         }
     }
 
-    function getEnvelopes(){
-        return $http.get('/api/getEnvelopes');
-    }
-
     function createEnvelope(data, form){
         document.getElementById(form).reset();
         return $http({
@@ -31,7 +27,7 @@ function envelopeFactory($q, balances, store, $http){
             , data: new Envelope(data)
         }).then(response => {
             console.log("success from server: ", response.data);
-            return $http.get('/api/getEnvelopes');
+            return store.getEnvelopes();
         });
     }
 
@@ -67,6 +63,7 @@ function envelopeFactory($q, balances, store, $http){
                 }
             });
             if(data.title_value !== 'Master Balance' && res.data.length >= 1){
+                debugger
                 balances.update(envelopeToDelete.amount_value, 'add');
             }
             $rootScope.$broadcast('closeModal');
@@ -81,7 +78,6 @@ function envelopeFactory($q, balances, store, $http){
     }
 
     return {
-        getEnvelopes:getEnvelopes,
         createEnvelope:createEnvelope,
         updateEnvelope:updateEnvelope,
         deleteEnvelope: deleteEnvelope,
