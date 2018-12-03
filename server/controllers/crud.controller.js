@@ -1,5 +1,5 @@
 
-exports.reset = (req, res) => req.app.get('db').initDb().then((response) => res.send('db has been reset'));
+exports.reset = (req, res) => req.app.get('db').initDb().then((response) => res.status(200).send('db has been reset'));
 // CREATE
 exports.create = (req, res) => {
     let rb = req.body;

@@ -1,17 +1,20 @@
 angular.module('billbo').component('history', {
     templateUrl:'../js/components/history/history.html',
-    controller: function($scope, store, _){
-        $scope.$on('updateStore', function(){
-            store.data.history.length === 0 ? $scope.history = null : $scope.history = store.data.history;
-        });
-        $scope.deleteItem = function(line){
-            var idx = _.indexOf(store.data.history, line);
-            store.data.history.splice(idx, 1);
-            if(store.data.history.length === 0){
-                $scope.history = null
-            } else {
-                $scope.$root.$broadcast('updateStore');
-            }
+    controller: function($scope, store, _, $filter){
+        function updateHistory(){
+            store.getHistory().then(response => {
+                $scope.history = response.data;
+                _.forEach($scope.history, function(e, i){
+                    e.date = $filter('date')(e.date, 'medium');
+                });
+            });
+        }
+        updateHistory();
+
+        $scope.$on('updateHistory', updateHistory);
+
+        $scope.deleteItem = function(id){
+            store.deleteHistory(id).then(response => updateHistory());
         }
     }
 })

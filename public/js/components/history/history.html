@@ -1,5 +1,5 @@
-<h1 ng-if="history">Purchases</h1>
-<section id="history" ng-if="history">
+<h1 ng-if="history.length > 0">Purchases</h1>
+<section id="history" ng-if="history.length > 0">
     <article id="gridHeader">
         <label>Id</label>
         <label>Description</label>
@@ -8,12 +8,12 @@
         <label>Date</label>
         <label>Actions</label>
     </article>
-    <article ng-repeat="line in history track by line.Line">
-        <span id="id">{{line.Line}}</span>
-        <span id="desc">{{line.Description}}</span>
-        <span id="amt">${{line.Amount}}</span>
-        <span id="from">{{line.From}}</span>
-        <span id="date">{{line.Date}}</span>
-        <span id="actions"><button ng-click="deleteItem(line)">Delete</button></span>
+    <article ng-repeat="line in history track by line.id">
+        <span class="id">{{line.id}}</span>
+        <span class="description">{{line.description}}</span>
+        <span class="amount">${{line.amount}}</span>
+        <span class="from_title">{{line.from_title}}</span>
+        <span class="date">{{line.date}}</span>
+        <span class="actions"><button ng-click="deleteItem(line.id)">Delete</button></span>
     </article>
 </section>

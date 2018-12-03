@@ -6,7 +6,7 @@ angular.module('billbo').component('envelope', {
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory){
         $scope.delete = envelopeFactory.deleteEnvelope;
-        this.$doCheck = function(){
+        function updateEnvelopes(){
             if($scope.vm.env){
                 $scope.id = $scope.vm.env.id
             }
@@ -14,7 +14,11 @@ angular.module('billbo').component('envelope', {
                 var el = document.getElementById($scope.id);
                 el.setAttribute('style', 'background: rgba(' + $scope.vm.env.color_r + ' ' + $scope.vm.env.color_g + ' ' + $scope.vm.env.color_b + ');');
             }
+        }
+        this.$doCheck = function(){
+            updateEnvelopes();
         };
+        $scope.$on('updateEnvelopes', updateEnvelopes);
         $scope.showModal = function(){
             console.log('show modal?')
         }

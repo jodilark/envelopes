@@ -12,7 +12,6 @@
         <h1>Balance: {{balance}}</h1>
     </section>
     <section>
-        <button ng-click="test()">TEST</button>
         <button ng-click="showModal(true, 'masterBalanceModal')">Add to balance</button>
         <button ng-if="envelopes.length >= 1" ng-click="showModal(true, 'transferModal')">transfer</button>
         <button ng-if="envelopes.length >= 1" ng-click="showModal(true, 'makePurchase')">make purchase</button>

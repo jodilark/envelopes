@@ -13,10 +13,11 @@ function store(){
 
             function resetAll(){
                 data.history.length = 0;
-                data.envelopes.length = 0;
-                data.masterBalance = 2000;
                 data.uniqueId = 1;
-                return $http.get('/reset');
+                return $http.get('/reset').then(response => {
+                    envSetter();
+                }).catch(err => console.log(err));
+                    
             }
         
             function getEnvelopes(){
@@ -42,13 +43,34 @@ function store(){
             function createData(data){
                 return $http.post('/api/createData', data);
             }
+
+            function createHistory(data){
+                return $http.post('/api/createHistory', data);
+            }
+
+            function getHistory(id){
+                if(id){
+                    return $http.get('/api/getHistory?id=' + id);
+                } else{
+                    console.log('inside store')
+                    return $http.get('/api/getHistory');
+                }
+            }
+
+            function deleteHistory(id){
+                return $http.delete('/api/deleteHistory?id=' + id);
+            }
+
             return {
                 data: data,
                 resetAll:resetAll,
                 createData:createData,
                 getEnvelopes:getEnvelopes,
                 updateEnvelope:updateEnvelope,
-                transferBalance:transferBalance
+                transferBalance:transferBalance,
+                createHistory:createHistory,
+                getHistory:getHistory,
+                deleteHistory:deleteHistory
             }
         }
     }
