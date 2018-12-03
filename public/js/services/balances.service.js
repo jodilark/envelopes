@@ -10,7 +10,8 @@ function balances($q, store){
             case 'add':
             value = Number(value);
             store.data.masterBalance += value;
-            return store.data.masterBalance;
+            store.updateEnvelope(1, {"amountValue": store.data.masterBalance})
+            return;
             case 'subtract':
             value = Number(value);
             store.data.masterBalance -= value;

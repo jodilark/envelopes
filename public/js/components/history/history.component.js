@@ -1,5 +1,5 @@
 angular.module('billbo').component('history', {
-    templateUrl:'../public/js/components/history/history.html',
+    templateUrl:'../js/components/history/history.html',
     controller: function($scope, store, _){
         $scope.$on('updateStore', function(){
             store.data.history.length === 0 ? $scope.history = null : $scope.history = store.data.history;

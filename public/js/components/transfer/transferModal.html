@@ -1,16 +1,15 @@
 <main id="modal">
     <content>
         <section id="edit-balance-modal-wrapper">
-            {{envelopes.length}}
             <form id="{{formId}}" name="{{formId}}" ng-submit="submit()">
                 <article>
-                    <select ng-model="fromEnvelope" ng-change="onChange()" ng-options="envelope.titleValue + ':     ' + envelope.amountValue for envelope in envelopes">
+                    <select ng-model="fromEnvelope" ng-change="onChange()" ng-options="envelope.title_value + ':     ' + envelope.amount_value for envelope in envelopes">
                         <option value="">----- From -----</option>
                     </select>
                     <input type="money" ng-model="fromFValue" name="fromValue" placeholder="0.00"/>
                 </article>
                 <article ng-if="fromFValue">
-                    <select ng-model="toEnvelope" ng-change="setTo(toEnvelope)" ng-options="envelope.titleValue + ':     ' + envelope.amountValue for envelope in toEnvelopes">
+                    <select ng-model="toEnvelope" ng-change="setTo(toEnvelope)" ng-options="envelope.title_value + ':     ' + envelope.amount_value for envelope in toEnvelopes">
                         <option value="">----- To -----</option>
                     </select>
                 </article>

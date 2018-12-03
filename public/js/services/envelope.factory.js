@@ -1,5 +1,5 @@
 angular.module('billbo').factory('envelopeFactory', envelopeFactory);
-function envelopeFactory($q, balances, store){
+function envelopeFactory($q, balances, store, $http){
     var envelopes = store.data.envelopes, $scope, $rootScope;
 
     class Envelope{
@@ -12,7 +12,6 @@ function envelopeFactory($q, balances, store){
                 g: Math.floor(Math.random() * Math.floor(255)),
                 b: Math.floor(Math.random() * Math.floor(255))
             };
-            this.id = getRandomInt(0, 9999999).toString();
         }
 
         formData(){
@@ -20,24 +19,21 @@ function envelopeFactory($q, balances, store){
         }
     }
 
-    function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-      }
-
-    function getEnvelopes(){
-        return $q.resolve(envelopes);
-    }
-
     function createEnvelope(data, form){
-        envelopes.push(new Envelope(data)); 
         document.getElementById(form).reset();
-        return $q.resolve(envelopes);
+        return $http({
+            url: '/api/createEnvelope'
+            , method: 'POST'
+            , data: new Envelope(data)
+        }).then(response => {
+            console.log("success from server: ", response.data);
+            return store.getEnvelopes();
+        });
     }
 
     function updateEnvelope(data){
-        var valueFrom = Number(data.value.from),
+        var originalMasterBalance,
+        valueFrom = Number(data.value.from),
         fromEnvelopeIndex = _.indexOf(envelopes, data.fromEnvelope),
         toEnvelopeIndex = _.indexOf(envelopes, data.toEnvelope),
         newFromBalance = envelopes[fromEnvelopeIndex].amountValue - valueFrom,
@@ -60,15 +56,19 @@ function envelopeFactory($q, balances, store){
     }
     
     function deleteEnvelope(data){
-        var elist;
         getEnvelopes().then(res => {
-            elist = res;
-            var envelopeToDelete = _.indexOf(elist, data);
-            if(data.titleValue !== 'Master Balance' && elist.length >= 1){
-                balances.update(elist[envelopeToDelete].amountValue, 'add');
+            var envelopeToDelete = _.find(res.data, function(e){
+                if(e.title_value === data.title_value){
+                    return e;
+                }
+            });
+            if(data.title_value !== 'Master Balance' && res.data.length >= 1){
+                debugger
+                balances.update(envelopeToDelete.amount_value, 'add');
             }
             $rootScope.$broadcast('closeModal');
-            elist.splice(envelopeToDelete,1);
+            $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id);
+            $rootScope.$broadcast('updateEnvelopes');
         });
     }
 
@@ -78,7 +78,6 @@ function envelopeFactory($q, balances, store){
     }
 
     return {
-        getEnvelopes:getEnvelopes,
         createEnvelope:createEnvelope,
         updateEnvelope:updateEnvelope,
         deleteEnvelope: deleteEnvelope,

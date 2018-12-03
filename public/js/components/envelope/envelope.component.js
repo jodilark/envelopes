@@ -2,7 +2,7 @@ angular.module('billbo').component('envelope', {
     bindings:{
         env: '<'
     },
-    templateUrl:'../public/js/components/envelope/envelope.html',
+    templateUrl:'../js/components/envelope/envelope.html',
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory){
         $scope.delete = envelopeFactory.deleteEnvelope;
@@ -12,7 +12,7 @@ angular.module('billbo').component('envelope', {
             }
             if(document.getElementById($scope.id)){
                 var el = document.getElementById($scope.id);
-                el.setAttribute('style', 'background: rgba(' + $scope.vm.env.color.r + ' ' + $scope.vm.env.color.g + ' ' + $scope.vm.env.color.b + ');');
+                el.setAttribute('style', 'background: rgba(' + $scope.vm.env.color_r + ' ' + $scope.vm.env.color_g + ' ' + $scope.vm.env.color_b + ');');
             }
         };
         $scope.showModal = function(){

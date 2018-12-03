@@ -1,5 +1,5 @@
 angular.module('billbo').component('masterBalanceModal', {
-    templateUrl: '../public/js/components/masterBalance/masterBalance.html',
+    templateUrl: '../js/components/masterBalance/masterBalance.html',
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory, _, balances){
        $scope.submit = function(){
