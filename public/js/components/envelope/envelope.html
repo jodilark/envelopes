@@ -1,9 +1,9 @@
 <div ng-if="vm.env.visible">
     <div class="env-wrapper">
-        <div id="{{id}}" class="env-modal-header">
+        <span id="{{id}}" class="env-modal-header">
             <div class="env-title">{{vm.env.title_value}}</div>
             <div class="closing_x" ng-click="delete(vm.env)">X</div>
-        </div>
+        </span>
         <div class="env-body" ng-click="showModal(true, 'transferModal')">
             <div name="balance" class="env-amount">{{vm.env.amount_value ? vm.env.amount_value : '0.00'}}</div>
         </div>

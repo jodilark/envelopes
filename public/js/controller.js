@@ -1,4 +1,5 @@
 angular.module('billbo').controller('main', function($scope, balances, _, envelopeFactory, store){
+    $('form').attr('autocomplete', 'off');
     $scope.navVisible = false;
     envelopeFactory.passScope($scope);
     $scope.$on('updateDom', function(){

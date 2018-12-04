@@ -1,11 +1,17 @@
 body {
     margin: auto;
-    color: white;
-    background: rgb(94, 96, 107);
-    box-sizing: border-box;
-    h1 {
-        margin: unset;
+    overflow: hidden;
+    #app_container {
+        color: white;
+        background: rgb(94, 96, 107);
+        height: 100vh;
+        h1 {
+            margin: unset;
+        }
     }
+}
+body, div, section, button, input, span {
+    box-sizing: border-box;
 }
 header {
     display: flex;
@@ -14,7 +20,7 @@ header {
     align-items: center;
     padding: 5px;
     background: black;
-    box-shadow: rgba(66, 66, 66, 0.5) 3px 3px 3px;
+    box-shadow: rgba(66, 66, 66, 0.5) 0px 3px 3px;
     nav {
         height: 39px;
         width: 40px;
@@ -40,11 +46,6 @@ header {
             background: slategray;
             form {
                 display: flex;
-                input {
-                    padding: unset;
-                    height: 25px;
-                    margin-right: 10px;
-                }
                 button {
                     i.fas {
                         line-height: initial;
@@ -59,52 +60,58 @@ hr {
     border-color: rgb(150, 150, 150);
 }
 
-
-div.env-wrapper {
-    width: 188px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 30px 50px;
-    border: 1px solid white;
-}
-div.env-wrapper > .env-modal-header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 10px;
-    color: rgb(244, 250, 253);
-    text-transform: uppercase;
-}
-
 div.closing_x {
     cursor:pointer;
 }
 
 button {
+    all: unset;
     background: #18465D;
     color: white;
     height: 30px;
+    padding: 0px 5px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+input {
+    padding: 0px 5px;
+    margin-right: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    min-height: 30px;
+    width: 100%;
+}
+:focus {
+    outline: 2px auto #4848d4;
 }
 
-div.env-wrapper > .env-body {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0px 10px;
-    background: #000000b6;
-    color: rgb(244, 250, 253);
-}
-div#envelope_list{
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, 188px);
-    grid-template-rows: repeat(auto-fill, 90px);
-    height: 282px;
-    border: 1px solid #000000b6;
-    overflow-y: scroll;
-    background: rgb(31, 31, 31);
+//ENVELOPES
+div#envelope_main {
+    border: 1px dashed red;
+    height: 700px;
+    display: inline-block;
+    width: 100%;
+    & div#envelope_list {
+        border: 1px dashed blue;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        & .env-wrapper {
+            display: inline-block;
+            border: 1px solid rgb(150, 150, 150);
+            box-shadow: rgba(66, 66, 66, 0.5) 3px 3px 3px;
+            min-width: 100px;
+            margin: 5px;
+            .env-modal-header {
+                display: flex;
+                justify-content: space-between;
+                padding: 3px;
+            }
+            .env-body {
+                background: #f6f6f6;
+                color: black;
+                padding: 3px;
+            }
+        }
+    }
 }
 
 main#modal {
@@ -115,28 +122,39 @@ main#modal {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-}
-
-main#modal content {
-    position: relative;
-    margin: 200px auto;
-    width: 284px;
-    border: 2px solid black;
     display: flex;
-    justify-content: space-around;
-    background: white;
-    box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: flex-start;
+    content {
+        header {
+            box-shadow: rgba(66, 66, 66, 0.5) 0px 3px 3px;
+            margin-bottom: 10px;
+        }
+        position: relative;
+        margin: 118px auto;
+        width: 284px;
+        display: inline-block;
+        background: #b3b9bf;
+        border: 1px solid #969696;
+        box-shadow: rgba(66, 66, 66, 0.5) 3px 3px 3px;
+        & article {
+            margin: 5px;
+        }
+        article:last-child {
+            float: right;
+            button:first-child {
+                margin-right: 5px;
+            }
+        }
+    }
 }
 
-section#edit-balance-modal-wrapper article {
-    display: inline-block;
-    margin: 10px;
-    color: black;
-}
 
 option {
     color: black;
 }
+
+//HISTORY
 #history {
     overflow-x: scroll;
 }
