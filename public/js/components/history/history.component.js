@@ -7,6 +7,7 @@ angular.module('billbo').component('history', {
                 _.forEach($scope.history, function(e, i){
                     e.date = $filter('date')(e.date, 'medium');
                 });
+                $scope.myData = $scope.history;
             });
         }
         updateHistory();

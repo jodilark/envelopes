@@ -9,7 +9,7 @@
                     <input type="money" ng-model="fromFValue" name="fromValue" placeholder="0.00"/>
                 </article>
                 <article ng-if="fromFValue">
-                    <select ng-model="toEnvelope" ng-change="setTo(toEnvelope)" ng-options="envelope.title_value + ':     ' + envelope.amount_value for envelope in toEnvelopes">
+                    <select ng-model="toEnvelope" ng-change="setTo(toEnvelope)" required ng-options="envelope.title_value + ':     ' + envelope.amount_value for envelope in toEnvelopes">
                         <option value="">----- To -----</option>
                     </select>
                 </article>

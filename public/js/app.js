@@ -1,1 +1,1 @@
-angular.module('billbo', []);
+angular.module('billbo', ['ui.grid']);
