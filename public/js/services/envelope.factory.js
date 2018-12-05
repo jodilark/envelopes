@@ -56,19 +56,18 @@ function envelopeFactory($q, balances, store, $http){
     }
     
     function deleteEnvelope(data){
-        getEnvelopes().then(res => {
+        store.getEnvelopes().then(res => {
             var envelopeToDelete = _.find(res.data, function(e){
                 if(e.title_value === data.title_value){
                     return e;
                 }
             });
             if(data.title_value !== 'Master Balance' && res.data.length >= 1){
-                debugger
                 balances.update(envelopeToDelete.amount_value, 'add');
             }
-            $rootScope.$broadcast('closeModal');
-            $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id);
-            $rootScope.$broadcast('updateEnvelopes');
+            $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id).then(response => {
+                $rootScope.$broadcast('updateEnvelopes');
+            });
         });
     }
 

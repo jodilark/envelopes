@@ -15,7 +15,7 @@ function balances($q, store){
             case 'subtract':
             value = Number(value);
             store.data.masterBalance -= value;
-            return store.data.masterBalance;
+            store.updateEnvelope(1, {"amountValue": store.data.masterBalance})
             default:
             angular.noop();
         }

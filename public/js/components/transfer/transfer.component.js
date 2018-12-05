@@ -3,6 +3,7 @@ angular.module('billbo').component('transferModal', {
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory, _, balances, store){
         var from;
+        $('form').attr('autocomplete', 'off');
         store.getEnvelopes().then(function(res){
             $scope.envelopes = res.data.filter(function(e, i){
                 if(Number(e.amount_value) > 0){

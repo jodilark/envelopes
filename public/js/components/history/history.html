@@ -1,19 +1,5 @@
-<h1 ng-if="history">Purchases</h1>
-<section id="history" ng-if="history">
-    <article id="gridHeader">
-        <label>Id</label>
-        <label>Description</label>
-        <label>Amount</label>
-        <label>Envelope</label>
-        <label>Date</label>
-        <label>Actions</label>
-    </article>
-    <article ng-repeat="line in history track by line.Line">
-        <span id="id">{{line.Line}}</span>
-        <span id="desc">{{line.Description}}</span>
-        <span id="amt">${{line.Amount}}</span>
-        <span id="from">{{line.From}}</span>
-        <span id="date">{{line.Date}}</span>
-        <span id="actions"><button ng-click="deleteItem(line)">Delete</button></span>
-    </article>
+<h1 ng-if="history.length > 0">Purchases</h1>
+<section id="history" ng-if="history.length > 0">
+    <div ng-if="!refresh" id="hgrid" ui-grid="gridOptions" class="myGrid" ui-grid-selection ui-grid-edit ui-grid-resize-columns ui-grid-move-columns ui-grid-pinning></div>
 </section>
+<span id="history_delete"><button ng-click="deleteItem(deleteId)" ng-disabled="disableDelete">Delete Selected Row</button></span>

@@ -6,38 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="./dist/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="styleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.6.6/ui-grid.min.css"/>
 </head>
 <body ng-controller="main">
-    <section>
-        <h1>Balance: {{balance}}</h1>
-    </section>
-    <section>
-        <button ng-click="test()">TEST</button>
-        <button ng-click="showModal(true, 'masterBalanceModal')">Add to balance</button>
-        <button ng-if="envelopes.length >= 1" ng-click="showModal(true, 'transferModal')">transfer</button>
-        <button ng-if="envelopes.length >= 1" ng-click="showModal(true, 'makePurchase')">make purchase</button>
-        <button ng-if="envelopes.length >= 1" ng-click="reset()">*Reset All</button>
-    </section>
-    <balance-adjustment-modal ng-if="showBalanceModal"></balance-adjustment-modal>
-    <transfer-modal ng-if="transferModal"></transfer-modal>
-    <master-balance-modal ng-if="masterBalanceModal"></master-balance-modal>
-    <make-purchase-modal ng-if="makePurchase"></make-purchase-modal>
-    <form id="fdata" name="fdata" ng-submit="createEnvelope()">
-        <input type="text" required ng-model="fdata.title" placeholder="title"/>
-        <button type="submit">New Envelope</button>
-    </form>
-    <div id="envelope_main" ng-if="envelopes.length > 1">
-        <h1>Envelopes</h1>
-        <div id="envelope_list">
-            <section ng-if="envelope.visible" ng-repeat="envelope in envelopes">
-                <envelope env="envelope"></envelope>
-            </section>
+    <div id="app_container">
+        <header>
+            <h1>Balance: {{balance}}</h1>
+            <nav>
+                <i class="fas fa-bars" ng-click="toggleNav()"></i>
+                <section ng-show="navVisible">
+                    <button ng-click="showModal(true, 'masterBalanceModal')">Add to balance</button>
+                    <button ng-if="envelopes.length >= 1" ng-click="showModal(true, 'transferModal')">transfer</button>
+                    <button ng-if="envelopes.length >= 1" ng-click="showModal(true, 'makePurchase')">make purchase</button>
+                    <button ng-if="envelopes.length >= 1" ng-click="reset()">*Reset All</button>
+                    <form id="fdata" name="fdata" ng-submit="createEnvelope()">
+                        <input type="text" required ng-model="fdata.title" placeholder="New Envelope Title"/>
+                        <button type="submit"><i class="fas fa-plus"></i></button>
+                    </form>
+                </section>
+            </nav>  
+        </header>
+        <hr>
+        <balance-adjustment-modal ng-if="showBalanceModal"></balance-adjustment-modal>
+        <transfer-modal ng-if="transferModal"></transfer-modal>
+        <master-balance-modal ng-if="masterBalanceModal"></master-balance-modal>
+        <make-purchase-modal ng-if="makePurchase"></make-purchase-modal>
+        <div id="envelope_main" ng-if="envelopes.length > 1">
+            <h1>Envelopes</h1>
+            <div id="envelope_list">
+                <section ng-if="envelope.visible" ng-repeat="envelope in envelopes">
+                    <envelope env="envelope"></envelope>
+                </section>
+            </div>
         </div>
+        <history></history>
     </div>
-    <history></history>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.6.6/ui-grid.min.js'></script>
     <script src="./dist/js/bundle.js"></script>
 </body>
 </html>

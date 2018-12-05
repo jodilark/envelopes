@@ -6,6 +6,7 @@ const app = express();
 const config = require('./config')
 const port = config.appPort;
 const crud = require('./server/controllers/crud.controller');
+const history = require('./server/controllers/crud.history.controller');
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 
@@ -20,10 +21,7 @@ massive({
       console.log('connected to database')
   });
 
-  
-app.post('/api/createData', function(req, res){
-    res.status(200).send(req.body);
-});
+//ENVELOPES
 app.get('/reset', crud.reset);
 app.post('/api/createEnvelope', crud.create);
 app.get('/api/envelope', crud.envelope);
@@ -31,7 +29,11 @@ app.get('/api/getEnvelopes', crud.getEnvelopes);
 app.put('/api/updateEnvelope', crud.updateEnvelope);
 app.put('/api/transferBalance', crud.transferBalance);
 app.delete('/api/deleteEnvelope', crud.deleteEnvelope);
-  
+
+//HISTORY
+app.get('/api/getHistory', history.getHistory);
+app.post('/api/createHistory', history.addHistoryRow);
+app.delete('/api/deleteHistory', history.deleteHistoryById);
 
 app.listen(port, function(){
     console.log('listening on port: ', port);

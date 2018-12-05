@@ -1,15 +1,14 @@
 <main id="modal">
     <content>
-        <section id="edit-balance-modal-wrapper">
-            <form id="mbTransfer" name="mbTransfer" ng-submit="submit()">
-                <article>
-                    <input type="money" ng-model="mbTransfer.value" name="transferValue" placeholder="0.00"/>
-                </article>
-                <article>
-                    <button type="submit">Complete</button>
-                    <button ng-click="closeModal()">Cancel</button>
-                </article>
-            </form>
-        </section>
+        <header>Add to Master Balance</header>
+        <form id="mbTransfer" name="mbTransfer" ng-submit="submit()">
+            <article>
+                <input id="m_balance_input" type="number" ng-model="mbTransfer.value" name="transferValue" placeholder="0.00"/>
+            </article>
+            <article>
+                <button type="submit">Complete</button>
+                <button ng-click="closeModal()">Cancel</button>
+            </article>
+        </form>
     </content>
 </main>

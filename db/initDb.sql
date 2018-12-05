@@ -1,7 +1,7 @@
 -- SCHEMA DELETE
 	DROP TABLE IF EXISTS envelopes CASCADE;
 	DROP TABLE IF EXISTS history CASCADE;
-	DROP FUNCTION IF EXISTS TransferBalance;
+	DROP FUNCTION IF EXISTS TransferBalance(FromAccountId INT, ToAccountId INT, Amount NUMERIC(7,2));
 -- ENVELOPES
 	CREATE TABLE IF NOT EXISTS envelopes
 	(
@@ -23,16 +23,15 @@
         color_b
     )
     VALUES
-    ('Master Balance', 2000, false, null, null, null)
+    ('Master Balance', 0, false, null, null, null)
 	;
 	CREATE TABLE IF NOT EXISTS history
 	(
 		id serial primary key
-		, 'line' int
 		, description varchar
 		, amount numeric(7,2)
-		, 'from' varchar
-		, 'date' date
+		, from_title varchar
+		, "date" date
 	);
 
 	CREATE FUNCTION TransferBalance (FromAccountId INT, ToAccountId INT, Amount NUMERIC(7,2))
