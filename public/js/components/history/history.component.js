@@ -19,7 +19,7 @@ angular.module('billbo').component('history', {
                     , infiniteScrollUp: true
                     , infiniteScrollDown: true
                     , columnDefs: [
-                        { name:'id', width:50, pinnedLeft:true},
+                        { name:'id', width:50},
                         { name:'description', width:100, filter:{placeholder:'filter'} },
                         { name:'amount', width:100, filter:{placeholder:'filter'} },
                         { name:'from_title', width:100, filter:{placeholder:'filter'}, displayName: 'From' },

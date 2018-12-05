@@ -113,7 +113,7 @@ div#envelope_main {
             display: inline-block;
             border: 1px solid rgb(150, 150, 150);
             box-shadow: rgba(66, 66, 66, 0.5) 3px 3px 3px;
-            min-width: 100px;
+            min-width: 114px;
             margin: 5px;
             .env-modal-header {
                 display: flex;
@@ -175,13 +175,13 @@ section#history {
     border: 1px solid #969696;
     background: slategray;
     margin: 5px;
-    height: 400px;
     .myGrid {
         width: 100%;
         height: initial !important;
         display: inline-block;
-        .ui-grid-filter {
-            padding: 0px 5px 5px;
+        .ui-grid-filter-container {
+            margin: 0px 5px 5px;
+            padding: initial;
         }
         & input {
             min-height: 20px;
