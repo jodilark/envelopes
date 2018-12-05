@@ -5,15 +5,24 @@ body {
         color: white;
         background: rgb(94, 96, 107);
         height: 100vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
         h1 {
             margin: unset;
         }
+        & history {
+            h1 {
+                margin-left: 5px;
+            }
+        }
     }
 }
-body, div, section, button, input, span, select {
+body, header, nav, div, section, button, input, span, select {
     box-sizing: border-box;
 }
 header {
+    position:fixed;
+    width:100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -21,6 +30,7 @@ header {
     padding: 5px;
     background: black;
     box-shadow: rgba(66, 66, 66, 0.5) 0px 3px 3px;
+    z-index: 9;
     nav {
         height: 39px;
         width: 40px;
@@ -87,7 +97,7 @@ input, select {
 
 //ENVELOPES
 div#envelope_main {
-    border: 1px dashed red;
+    margin-top: 39px;
     max-height: 620px;
     display: inline-block;
     width: 100%;
@@ -95,7 +105,6 @@ div#envelope_main {
         padding-left: 5px;
     }
     & div#envelope_list {
-        border: 1px dashed blue;
         display: flex;
         flex-wrap: wrap;
         width: 100%;
@@ -162,18 +171,46 @@ option {
 
 //HISTORY
 section#history {
-    width: 100%;
-    height: 300px;
     overflow: scroll;
+    border: 1px solid #969696;
+    background: slategray;
+    margin: 5px;
+    height: 400px;
     .myGrid {
-        width: 500px;
-        height: 250px;
+        width: 100%;
+        height: initial !important;
+        display: inline-block;
+        .ui-grid-filter {
+            padding: 0px 5px 5px;
+        }
+        & input {
+            min-height: 20px;
+            padding: initial;
+        }
         .ui-grid-top-panel {
             background: #18465D;
         }
-        .ui-grid-row:last-child .ui-grid-cell {
+        .ui-grid-row:nth-child(odd) .ui-grid-cell {
             background: slategray;
+        }
+        .ui-grid-row:nth-child(even) .ui-grid-cell {
+            background: #768ba0;
+        }
+        .ui-grid-row.ui-grid-row-selected .ui-grid-cell {
+            background: #5a96cd;
         }
     }
 }
+#history_delete {
+    width: 100%;
+    margin-top: 5px;
+    margin-right: 5px;
+    button {
+        float: right;
+    }
+    button:disabled {
+        display: none;
+    }
+}
+
 

@@ -52,7 +52,6 @@ function store(){
                 if(id){
                     return $http.get('/api/getHistory?id=' + id);
                 } else{
-                    console.log('inside store')
                     return $http.get('/api/getHistory');
                 }
             }

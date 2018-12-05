@@ -2,6 +2,7 @@ angular.module('billbo').component('makePurchaseModal', {
     templateUrl: '../js/components/purchase/makePurchaseModal.html',
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory, _, balances, store){
+        $('form').attr('autocomplete', 'off');
         store.getEnvelopes().then(function(res){
             $scope.envelopes = res.data.filter(function(e, i){
                 if(Number(e.amount_value) > 0){

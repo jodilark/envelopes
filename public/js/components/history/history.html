@@ -1,4 +1,5 @@
 <h1 ng-if="history.length > 0">Purchases</h1>
 <section id="history" ng-if="history.length > 0">
-    <div ui-grid="{ data: myData }" class="myGrid"></div>
+    <div id="hgrid" ui-grid="gridOptions" class="myGrid" ui-grid-selection ui-grid-edit ui-grid-resize-columns ui-grid-move-columns ui-grid-pinning></div>
 </section>
+<span id="history_delete"><button ng-click="deleteItem(deleteId)" ng-disabled="disableDelete">Delete Selected Row</button></span>
