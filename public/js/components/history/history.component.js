@@ -1,6 +1,6 @@
 angular.module('billbo').component('history', {
     templateUrl:'../js/components/history/history.html',
-    controller: function($scope, store, _, $filter){
+    controller: function($scope, store, _, $filter, $timeout){
         function updateHistory(){
             $scope.disableDelete = true;
             store.getHistory().then(response => {
@@ -19,7 +19,7 @@ angular.module('billbo').component('history', {
                     , infiniteScrollUp: true
                     , infiniteScrollDown: true
                     , columnDefs: [
-                        { name:'id', width:50},
+                        { name:'id', width:50, enableFiltering: false},
                         { name:'description', width:100, filter:{placeholder:'filter'} },
                         { name:'amount', width:100, filter:{placeholder:'filter'} },
                         { name:'from_title', width:100, filter:{placeholder:'filter'}, displayName: 'From' },
@@ -37,6 +37,7 @@ angular.module('billbo').component('history', {
                     }
                 };
                 $scope.gridOptions.data = $scope.history
+                refresh();
             });
         }
         updateHistory();
@@ -47,6 +48,12 @@ angular.module('billbo').component('history', {
             $scope.disableDelete = true;
             $scope.deleteId = null;
             store.deleteHistory(id).then(response => updateHistory());
-        }
+        };
+        function refresh() {
+            $scope.refresh = true;
+            $timeout(function() {
+              $scope.refresh = false;
+            }, 0);
+        };
     }
 })

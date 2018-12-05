@@ -65,9 +65,9 @@ function envelopeFactory($q, balances, store, $http){
             if(data.title_value !== 'Master Balance' && res.data.length >= 1){
                 balances.update(envelopeToDelete.amount_value, 'add');
             }
-            $rootScope.$broadcast('closeModal');
-            $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id);
-            $rootScope.$broadcast('updateEnvelopes');
+            $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id).then(response => {
+                $rootScope.$broadcast('updateEnvelopes');
+            });
         });
     }
 
