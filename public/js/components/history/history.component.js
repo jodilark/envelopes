@@ -23,8 +23,7 @@ angular.module('billbo').component('history', {
                         { name:'description', width:100, filter:{placeholder:'filter'} },
                         { name:'amount', width:100, filter:{placeholder:'filter'} },
                         { name:'from_title', width:100, filter:{placeholder:'filter'}, displayName: 'From' },
-                        { name:'date', minWidth:200, maxWidth:200, filter:{placeholder:'filter'} },
-                        { name: ' ', width:30, enableColumnMenu: false, enableSorting:false, enableFiltering: false}
+                        { name:'date', minWidth:200, maxWidth:200, filter:{placeholder:'filter'} }
                     ], onRegisterApi: gridApi => {
                         gridApi.selection.on.rowSelectionChanged($scope, function (row) {     
                             $scope.selected = row.isSelected;

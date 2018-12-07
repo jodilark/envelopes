@@ -12,10 +12,15 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         $scope.navVisible = !$scope.navVisible;
     }
     
-    $scope.showModal = function(visibility, modal){
-        $scope.toggleNav();
+    $scope.showModal = function(visibility, modal, envelope){
+        if($scope.navVisible){
+            $scope.toggleNav();
+        }
+        if(envelope){
+            $scope.originEnvelope = envelope;
+        }
         $scope[modal] = visibility;
-    }
+    };
     $scope.$on('closeModal', function(context, modal){
         $scope[modal] = false;
     });

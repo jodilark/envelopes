@@ -179,10 +179,11 @@ option {
 
 //HISTORY
 section#history {
-    overflow: scroll;
+    overflow: hidden;
     border: 1px solid #969696;
     background: slategray;
     margin: 5px;
+    max-width: 539px;
     .myGrid {
         width: 100%;
         height: initial !important;

@@ -12,7 +12,7 @@
 <body ng-controller="main">
     <div id="app_container">
         <header>
-            <h1>Balance: {{balance}}</h1>
+            <h1 ng-click="showModal(true, 'masterBalanceModal')">Balance: {{balance}}</h1>
             <nav>
                 <i class="fas fa-bars" ng-click="toggleNav()"></i>
                 <section ng-show="navVisible">
@@ -32,11 +32,12 @@
         <transfer-modal ng-if="transferModal"></transfer-modal>
         <master-balance-modal ng-if="masterBalanceModal"></master-balance-modal>
         <make-purchase-modal ng-if="makePurchase"></make-purchase-modal>
+        <combined-modal ng-if="combinedModal" origin-envelope="originEnvelope"></combined-modal>
         <div id="envelope_main" ng-if="envelopes.length > 1">
             <h1>Envelopes</h1>
             <div id="envelope_list">
                 <section ng-if="envelope.visible" ng-repeat="envelope in envelopes">
-                    <envelope env="envelope"></envelope>
+                    <envelope ng-click="showModal(true, 'combinedModal', envelope)" env="envelope"></envelope>
                 </section>
             </div>
         </div>
