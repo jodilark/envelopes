@@ -36,7 +36,6 @@ angular.module('billbo').component('combinedModal', {
         // end
 
         $scope.submit = function(){
-            debugger
             let from = $scope.vm.originEnvelope.id, 
             to = $scope[$scope.formId].toEnvelope.id, 
             amount = Number($scope[$scope.formId].amount.$viewValue);
