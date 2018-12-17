@@ -19,8 +19,5 @@ angular.module('billbo').component('envelope', {
             updateEnvelopes();
         };
         $scope.$on('updateEnvelopes', updateEnvelopes);
-        $scope.showModal = function(){
-            console.log('show modal?')
-        }
     }
 })

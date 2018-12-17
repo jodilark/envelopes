@@ -222,4 +222,15 @@ section#history {
     }
 }
 
-
+@media screen and (max-width: 375px){
+    input, select {
+        font-size: 24px;
+        min-height: 35px;
+    }
+    input[type="number"],
+    input[type="text"],
+    select:focus,
+    textarea {
+      font-size: 24px;
+    }
+}
