@@ -107,9 +107,6 @@ div#envelope_main {
     max-height: 620px;
     display: inline-block;
     width: 100%;
-    h1 {
-        padding-left: 5px;
-    }
     & div#envelope_list {
         display: flex;
         flex-wrap: wrap;
@@ -181,38 +178,6 @@ option {
 }
 
 //HISTORY
-section#history {
-    overflow: hidden;
-    border: 1px solid #969696;
-    background: slategray;
-    margin: 5px;
-    max-width: 462px;
-    .myGrid {
-        width: 100%;
-        height: initial !important;
-        display: inline-block;
-        .ui-grid-filter-container {
-            margin: 0px 5px 5px;
-            padding: initial;
-        }
-        & input {
-            min-height: 20px;
-            padding: initial;
-        }
-        .ui-grid-top-panel {
-            background: #18465D;
-        }
-        .ui-grid-row:nth-child(odd) .ui-grid-cell {
-            background: slategray;
-        }
-        .ui-grid-row:nth-child(even) .ui-grid-cell {
-            background: #768ba0;
-        }
-        .ui-grid-row.ui-grid-row-selected .ui-grid-cell {
-            background: #5a96cd;
-        }
-    }
-}
 #history_delete {
     max-width: 596px;
     margin: 5px 0px 0px 5px;
