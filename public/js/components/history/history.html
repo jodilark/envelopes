@@ -1,5 +1,18 @@
-<h1 ng-if="history.length > 0">Purchases</h1>
-<section id="history" ng-if="history.length > 0">
-    <div ng-if="!refresh" id="hgrid" ui-grid="gridOptions" class="myGrid" ui-grid-selection ui-grid-edit ui-grid-resize-columns ui-grid-move-columns ui-grid-pinning></div>
+<header ng-if="history.length > 0" class="grid_header">Purchases</header>
+<section ng-if="history.length > 0" id="history_two">
+    <div class="h_grid" ng-repeat="row in history track by row.id" ng-click="toggleSelect(row.id)">
+        <span id="row_{{row.id}}" class="row" ng-model="row.id">          
+            <span class="first_column">
+                <span>{{row.description}}</span>
+            </span>
+            <span>
+                <span>{{row.date}}</span>
+            </span>
+            <span class="last_column">
+                <div>{{row.from_title}}</div>
+                <div>{{row.amount}}</div>
+            </span>
+        </span>
+    </div>
 </section>
-<span id="history_delete"><button ng-click="deleteItem(deleteId)" ng-disabled="disableDelete">Delete Selected Row</button></span>
+<span id="history_delete"><button ng-click="deleteItem(selectedHistoryRow)" ng-disabled="disableDelete">Delete Selected Row</button></span>

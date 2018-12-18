@@ -32,6 +32,10 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         store.resetAll();
     };
 
+    $scope.$on('combinedModal', function(referenceScope, envelope){
+        $scope.showModal(true, 'combinedModal', envelope);
+    });
+
     $scope.createEnvelope = function(){
         $scope.toggleNav();
         envelopeFactory.createEnvelope($scope.fdata, 'fdata').then(function(res){
