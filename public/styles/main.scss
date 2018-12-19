@@ -107,9 +107,6 @@ div#envelope_main {
     max-height: 620px;
     display: inline-block;
     width: 100%;
-    h1 {
-        padding-left: 5px;
-    }
     & div#envelope_list {
         display: flex;
         flex-wrap: wrap;
@@ -125,6 +122,9 @@ div#envelope_main {
                 display: flex;
                 justify-content: space-between;
                 padding: 3px;
+            }
+            .env-title, .env-body{
+                cursor: pointer;
             }
             .env-body {
                 background: #f6f6f6;
@@ -178,41 +178,11 @@ option {
 }
 
 //HISTORY
-section#history {
-    overflow: scroll;
-    border: 1px solid #969696;
-    background: slategray;
-    margin: 5px;
-    .myGrid {
-        width: 100%;
-        height: initial !important;
-        display: inline-block;
-        .ui-grid-filter-container {
-            margin: 0px 5px 5px;
-            padding: initial;
-        }
-        & input {
-            min-height: 20px;
-            padding: initial;
-        }
-        .ui-grid-top-panel {
-            background: #18465D;
-        }
-        .ui-grid-row:nth-child(odd) .ui-grid-cell {
-            background: slategray;
-        }
-        .ui-grid-row:nth-child(even) .ui-grid-cell {
-            background: #768ba0;
-        }
-        .ui-grid-row.ui-grid-row-selected .ui-grid-cell {
-            background: #5a96cd;
-        }
-    }
-}
 #history_delete {
+    max-width: 596px;
+    margin: 5px 0px 0px 5px;
+    display: inline-block;
     width: 100%;
-    margin-top: 5px;
-    margin-right: 5px;
     button {
         float: right;
     }
@@ -221,4 +191,66 @@ section#history {
     }
 }
 
+@media screen and (max-width: 375px){
+    input, select {
+        font-size: 24px;
+        min-height: 35px;
+    }
+    input[type="number"],
+    input[type="text"],
+    select:focus,
+    textarea {
+      font-size: 24px;
+    }
+}
 
+header.grid_header {
+    position: relative;
+    margin: 20px 5px 0px;
+    max-width: 590px;
+    width: initial;
+    display: block;
+    z-index: 1;
+}
+#history_two {
+    width: initial;
+    max-width: 600px;
+    max-height: 200px;
+    overflow: auto;
+    padding: 0px 5px;
+    position: relative;
+    .h_grid {
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-auto-rows: 50px;
+        .row {
+            padding-left: 5px;
+            color: rgb(240, 240, 240);
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            span {
+                width: 100%;
+            }
+            span.first_column {
+                float: left;
+            }
+            span.last_column {
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                width: 250px;
+            }
+        }
+    }
+    .h_grid:nth-child(odd){
+        background: #272727;
+    }
+    .h_grid:nth-child(even){
+        background: #040404;
+    }
+    .row.select{
+        background: rgb(49, 49, 82);
+    }
+}

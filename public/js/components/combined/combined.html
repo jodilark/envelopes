@@ -1,0 +1,22 @@
+<main id="modal">
+    <content>
+        <section id="edit-balance-modal-wrapper">
+            <header>
+                {{vm.originEnvelope.title_value}}
+            </header>
+            <form id="{{formId}}" name="{{formId}}" ng-submit="submit()">
+                <article ng-if="toEnvelopes">
+                    <select ng-model="toEnvelope" ng-change="setTo(toEnvelope)" required ng-options="envelope.title_value + ':     ' + envelope.amount_value for envelope in toEnvelopes">
+                        <option value="">----- To -----</option>
+                    </select>
+                    <input ng-if="purchase" type="text" ng-model="description" name="description" placeholder="Description">
+                    <input type="number" step="0.01" ng-model="amount" name="amount" placeholder="0.00"/>
+                </article>
+                <article>
+                    <button type="submit">Add</button>
+                    <button ng-click="closeModal()">Cancel</button>
+                </article>
+            </form>
+        </section>
+    </content>
+</main>

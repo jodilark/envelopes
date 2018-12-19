@@ -6,37 +6,8 @@ angular.module('billbo').component('history', {
             store.getHistory().then(response => {
                 $scope.history = response.data;
                 _.forEach($scope.history, function(e, i){
-                    e.date = $filter('date')(e.date, 'medium');
+                    e.date = $filter('date')(e.date, 'mediumDate');
                 });
-                $scope.gridOptions = {
-                    enableRowSelection: true
-                    , enableRowHeaderSelection: false
-                    , multiSelect: false
-                    , enableSelectAll: false
-                    , enableGridMenu: true
-                    , enableFiltering: true
-                    , infiniteScrollRowsFromEnd: 25
-                    , infiniteScrollUp: true
-                    , infiniteScrollDown: true
-                    , columnDefs: [
-                        { name:'id', width:50, enableFiltering: false},
-                        { name:'description', width:100, filter:{placeholder:'filter'} },
-                        { name:'amount', width:100, filter:{placeholder:'filter'} },
-                        { name:'from_title', width:100, filter:{placeholder:'filter'}, displayName: 'From' },
-                        { name:'date', minWidth:200, maxWidth:200, filter:{placeholder:'filter'} },
-                        { name: ' ', width:30, enableColumnMenu: false, enableSorting:false, enableFiltering: false}
-                    ], onRegisterApi: gridApi => {
-                        gridApi.selection.on.rowSelectionChanged($scope, function (row) {     
-                            $scope.selected = row.isSelected;
-                            $scope.rowId = row.uid;
-                            $scope.rowObj = row.entity;
-                            $scope.deleteId = row.entity.id;
-                            $scope.selected === true ? $scope.disableDelete = false : $scope.disableDelete = true;
-                            return;
-                        });
-                    }
-                };
-                $scope.gridOptions.data = $scope.history
                 refresh();
             });
         }
@@ -47,8 +18,30 @@ angular.module('billbo').component('history', {
         $scope.deleteItem = function(id){
             $scope.disableDelete = true;
             $scope.deleteId = null;
+            $scope.selectedHistoryRow = null;
             store.deleteHistory(id).then(response => updateHistory());
         };
+        $scope.selectedHistoryRow;
+        $scope.toggleSelect = function(id){
+            let selectedRow = document.querySelector('#row_'+id);
+            let elements = document.querySelector('.select');
+            if(!elements){
+                selectedRow.classList.add('select');
+                $scope.selectedHistoryRow = id;
+                $scope.disableDelete = false;
+            } else {
+                elements.classList.remove('select');
+                if($scope.selectedHistoryRow === id){
+                    $scope.selectedHistoryRow = null;
+                    $scope.disableDelete = true;
+                } else {
+                    selectedRow.classList.add('select');
+                    $scope.selectedHistoryRow = id;
+                    $scope.disableDelete = false;
+                }
+            }
+        }
+
         function refresh() {
             $scope.refresh = true;
             $timeout(function() {

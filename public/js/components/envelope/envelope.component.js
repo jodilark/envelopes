@@ -15,12 +15,12 @@ angular.module('billbo').component('envelope', {
                 el.setAttribute('style', 'background: rgba(' + $scope.vm.env.color_r + ',' + $scope.vm.env.color_g + ',' + $scope.vm.env.color_b + ',0.3);');
             }
         }
+        $scope.showCombined = function(envelope){
+            $scope.$root.$broadcast('combinedModal', envelope);
+        }
         this.$doCheck = function(){
             updateEnvelopes();
         };
         $scope.$on('updateEnvelopes', updateEnvelopes);
-        $scope.showModal = function(){
-            console.log('show modal?')
-        }
     }
 })

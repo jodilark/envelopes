@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Document</title>
     <link rel="stylesheet" href="./dist/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -12,7 +13,7 @@
 <body ng-controller="main">
     <div id="app_container">
         <header>
-            <h1>Balance: {{balance}}</h1>
+            <h1 ng-click="showModal(true, 'masterBalanceModal')">Balance: {{balance}}</h1>
             <nav>
                 <i class="fas fa-bars" ng-click="toggleNav()"></i>
                 <section ng-show="navVisible">
@@ -32,8 +33,8 @@
         <transfer-modal ng-if="transferModal"></transfer-modal>
         <master-balance-modal ng-if="masterBalanceModal"></master-balance-modal>
         <make-purchase-modal ng-if="makePurchase"></make-purchase-modal>
+        <combined-modal ng-if="combinedModal" origin-envelope="originEnvelope"></combined-modal>
         <div id="envelope_main" ng-if="envelopes.length > 1">
-            <h1>Envelopes</h1>
             <div id="envelope_list">
                 <section ng-if="envelope.visible" ng-repeat="envelope in envelopes">
                     <envelope env="envelope"></envelope>
@@ -45,7 +46,6 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/4.6.6/ui-grid.min.js'></script>
     <script src="./dist/js/bundle.js"></script>
 </body>
 </html>

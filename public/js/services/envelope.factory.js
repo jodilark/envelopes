@@ -67,6 +67,9 @@ function envelopeFactory($q, balances, store, $http){
             }
             $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id).then(response => {
                 $rootScope.$broadcast('updateEnvelopes');
+                setTimeout(function(){
+                    window.location.reload();
+                }, 500)
             });
         });
     }
