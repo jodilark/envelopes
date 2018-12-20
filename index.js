@@ -37,4 +37,5 @@ app.delete('/api/deleteHistory', history.deleteHistoryById);
 
 app.listen(port, function(){
     console.log('listening on port: ', port);
+    return "0.0.0.0";
 });
