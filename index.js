@@ -7,6 +7,7 @@ const config = require('./config')
 const port = config.appPort;
 const crud = require('./server/controllers/crud.controller');
 const history = require('./server/controllers/crud.history.controller');
+const features = require('./features');
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 
@@ -34,6 +35,9 @@ app.delete('/api/deleteEnvelope', crud.deleteEnvelope);
 app.get('/api/getHistory', history.getHistory);
 app.post('/api/createHistory', history.addHistoryRow);
 app.delete('/api/deleteHistory', history.deleteHistoryById);
+
+//features
+app.get('/features', (req, res) => res.status(200).send(features));
 
 app.listen(port, function(){
     console.log('listening on port: ', port);
