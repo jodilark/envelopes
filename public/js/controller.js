@@ -1,4 +1,4 @@
-angular.module('billbo').controller('main', function($scope, balances, _, envelopeFactory, store, features){
+angular.module('billbo').controller('main', function($scope, balances, _, envelopeFactory, store, config){
     $('form').attr('autocomplete', 'off');
     $scope.navVisible = false;
     envelopeFactory.passScope($scope);
@@ -42,7 +42,7 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
             $scope.envelopes = res.data;
         });
     };
-    // Used to run operations based on features from main controller
-    setTimeout(features.configurator);
+    //test that the config is reading
+    console.log('in controller and config', config)
     
 });

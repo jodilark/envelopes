@@ -1,0 +1,1 @@
+angular.module('appConfig', []).constant('config', {})

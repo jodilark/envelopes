@@ -1,3 +1,4 @@
 {
-    "fillUp" : true
+    "fillUp" : true,
+    "notifications" : true
 }
