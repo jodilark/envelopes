@@ -6,7 +6,6 @@ angular.module('billbo').component('notificationContainer', {
     controller: function($scope, notification){
         this.$onInit = function(){
             angular.extend($scope, $scope.notify.type);
-            console.log($scope)
         }
         $('document').ready(() => $('.button_listener').click(() => notification.hideIt()))
     },
