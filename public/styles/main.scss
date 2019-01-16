@@ -1,6 +1,9 @@
 body {
     margin: auto;
     overflow: hidden;
+    & p {
+        margin: initial;
+    }
     #app_container {
         color: white;
         background: rgb(94, 96, 107);

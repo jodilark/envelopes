@@ -10,7 +10,7 @@ var gulp = require('gulp')
 
 var gulpPath = {
 jsSource: ['./public/js/**/*.js', '.public/js/*.js']
-,scss: ['./public/styles/*.*css', './public/styles/fonts/*.*css']
+,scss: ['./public/styles/*.*css', './public/styles/fonts/*.*css', './public/js/components/**/*.*css']
 }
 
 gulp.task ('build-css', function (){

@@ -1,0 +1,11 @@
+<section ng-if="blocker" class="blocker"></section>
+<div class="message_container">
+    <section class="{{notifyType}}">
+        <article><p>{{notifyText}}</p></article>
+        <footer ng-if="buttons">
+            <div ng-repeat="button in buttons">
+                <button class="button_listener" ng-click="button.action()">{{button.text}}</button>
+            </div>
+        </footer>
+    </section>
+</div>

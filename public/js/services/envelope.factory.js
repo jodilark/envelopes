@@ -1,5 +1,5 @@
 angular.module('billbo').factory('envelopeFactory', envelopeFactory);
-function envelopeFactory($q, balances, store, $http){
+function envelopeFactory($q, balances, store, $http, notification){
     var envelopes = store.data.envelopes, $scope, $rootScope;
 
     class Envelope{
@@ -26,7 +26,12 @@ function envelopeFactory($q, balances, store, $http){
             , method: 'POST'
             , data: new Envelope(data)
         }).then(response => {
-            console.log("success from server: ", response.data);
+            // console.log("success from server: ", response.data);
+            let context = {
+                notifyType: 'success',
+                notifyText: `${response.data} successfully.`
+            };
+            notification.resolveNotificationType(context);
             return store.getEnvelopes();
         });
     }
@@ -56,22 +61,39 @@ function envelopeFactory($q, balances, store, $http){
     }
     
     function deleteEnvelope(data){
-        store.getEnvelopes().then(res => {
-            var envelopeToDelete = _.find(res.data, function(e){
-                if(e.title_value === data.title_value){
-                    return e;
+        function deleteIt(){
+            store.getEnvelopes().then(res => {
+                var envelopeToDelete = _.find(res.data, function(e){
+                    if(e.title_value === data.title_value){
+                        return e;
+                    }
+                });
+                if(data.title_value !== 'Master Balance' && res.data.length >= 1){
+                    balances.update(envelopeToDelete.amount_value, 'add');
                 }
+                $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id).then(response => {
+                    $rootScope.$broadcast('updateEnvelopes');
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 500)
+                });
             });
-            if(data.title_value !== 'Master Balance' && res.data.length >= 1){
-                balances.update(envelopeToDelete.amount_value, 'add');
-            }
-            $http.delete('/api/deleteEnvelope' + '?id=' + envelopeToDelete.id).then(response => {
-                $rootScope.$broadcast('updateEnvelopes');
-                setTimeout(function(){
-                    window.location.reload();
-                }, 500)
-            });
-        });
+        }
+        let context = {
+            notifyType: 'ays',
+            notifyText: `Do you really want to delete this envelope?`,
+            buttons: [
+                {
+                    text: 'YES',
+                    action: deleteIt
+                },
+                {
+                    text: 'No',
+                    action: () => {return}
+                }
+            ]   
+        }
+        notification.resolveNotificationType(context);
     }
 
     function passScope(obj){

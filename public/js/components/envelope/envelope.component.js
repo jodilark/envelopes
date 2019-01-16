@@ -4,7 +4,7 @@ angular.module('billbo').component('envelope', {
     },
     templateUrl:'../js/components/envelope/envelope.html',
     controllerAs: 'vm',
-    controller: function($scope, envelopeFactory, features){
+    controller: function($scope, envelopeFactory, features, config){
         $scope.delete = envelopeFactory.deleteEnvelope;
         function updateEnvelopes(){
             if($scope.vm.env){

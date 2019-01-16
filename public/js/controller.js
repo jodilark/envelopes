@@ -1,4 +1,4 @@
-angular.module('billbo').controller('main', function($scope, balances, _, envelopeFactory, store, features){
+angular.module('billbo').controller('main', function($scope, balances, _, envelopeFactory, store, config, notification){
     $('form').attr('autocomplete', 'off');
     $scope.navVisible = false;
     envelopeFactory.passScope($scope);
@@ -42,7 +42,20 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
             $scope.envelopes = res.data;
         });
     };
-    // Used to run operations based on features from main controller
-    setTimeout(features.configurator);
-    
+
+    $scope.showNotification = false;
+    $scope.$on('updateNotification', function(scopes, notificationContext){
+        $scope.showNotification = notificationContext.showNotify;
+        $scope.type = notificationContext;
+        if(notificationContext.timeout){
+            notificationContext.timeout *= 1000;
+            setTimeout(function(){
+                $scope.showNotification = false;
+                $scope.$apply();
+            },notificationContext.timeout);
+        }
+        if(!notificationContext.showNotify){
+            setTimeout(() => $scope.$apply())
+        }
+    });    
 });
