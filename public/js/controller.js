@@ -1,4 +1,4 @@
-angular.module('billbo').controller('main', function($scope, balances, _, envelopeFactory, store, config){
+angular.module('billbo').controller('main', function($scope, balances, _, envelopeFactory, store, config, notification){
     $('form').attr('autocomplete', 'off');
     $scope.navVisible = false;
     envelopeFactory.passScope($scope);
@@ -42,7 +42,75 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
             $scope.envelopes = res.data;
         });
     };
-    //test that the config is reading
-    console.log('in controller and config', config)
+    // to test notifications
+    function positiveAction(){
+        alert('YAY!');
+    }
+  
+    function negativeAction(){
+        alert('BOO!');
+    }
+
+    function reload(){
+        window.location.reload();
+    }
+  
+    $scope.showNotification = false;
+    $scope.$on('updateNotification', function(scopes, notificationContext){
+        $scope.showNotification = notificationContext.showNotify;
+        $scope.type = notificationContext;
+        if(notificationContext.timeout){
+            notificationContext.timeout *= 1000;
+            setTimeout(function(){
+                $scope.showNotification = false;
+                $scope.$apply();
+            },notificationContext.timeout);
+        }
+        if(!notificationContext.showNotify){
+            setTimeout(() => $scope.$apply())
+        }
+    });
+    $scope.showNotify = function( type ){ //Temporary function used for testing
+        var context;
+        switch(type){
+            case 'success':
+            context = {
+                notifyType: 'success',
+                notifyText: 'You have tested... wisely.'
+            };
+            break;
+            case 'error':
+            context = {
+                notifyType: 'error',
+                notifyText: '2319',
+                buttons: [
+                    {
+                        text: 'Reload',
+                        action: reload
+                    }
+                ]
+            };
+            break;
+            case 'ays':
+            context = {
+                notifyType: 'ays',
+                notifyText: 'Are you serious, Clark?',
+                buttons: [
+                    {
+                        text: 'YES',
+                        action: positiveAction
+                    },
+                    {
+                        text: 'NO',
+                        action: negativeAction
+                    }
+                ]
+            };
+            break;
+            default:
+            break;
+        }
+        notification.resolveNotificationType(context);
+    };
     
 });

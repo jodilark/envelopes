@@ -5,7 +5,6 @@ angular.module('billbo').component('envelope', {
     templateUrl:'../js/components/envelope/envelope.html',
     controllerAs: 'vm',
     controller: function($scope, envelopeFactory, features, config){
-        console.log('in component and config', config)
         $scope.delete = envelopeFactory.deleteEnvelope;
         function updateEnvelopes(){
             if($scope.vm.env){
