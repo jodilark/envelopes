@@ -1,0 +1,30 @@
+option-selector > div{
+    position: absolute;
+    bottom: -58px;
+    right: -19px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px dashed pink;
+    section {
+        margin: 0px 5px;
+    }
+    section:first-child {
+        margin: 0px 5px 0px 0px;
+    }
+    section:last-child {
+        margin: 0px 0px 0px 5px;
+    }
+    & article {
+        height: 50px;
+        width: 50px;
+        color: white;
+        border-radius: 50%;
+        border: 1px solid rgb(150, 150, 150);
+        box-shadow: rgba(66, 66, 66, 0.5) 3px 3px 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,3 +1,3 @@
-angular.module('billbo', ['appConfig']).config(['$qProvider', function ($qProvider) {
+angular.module('billbo', ['appConfig', 'suboption']).config(['$qProvider', function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
 }]);
