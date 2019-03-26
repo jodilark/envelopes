@@ -14,17 +14,11 @@
     <notification-container ng-if="showNotification" type="type"></notification-container>
     <div id="app_container">
         <header>
-            <h1 ng-click="showModal(true, 'masterBalanceModal')">Balance: {{balance}}</h1>
+            <h1 option-selector='{"type":"master"}'>Balance: {{balance}}</h1>
             <nav>
                 <i class="fas fa-bars" ng-click="toggleNav()"></i>
                 <section ng-show="navVisible">
-                    <button ng-click="showModal(true, 'masterBalanceModal')">Add to balance</button>
-                    <button ng-if="envelopes.length >= 1" ng-click="showModal(true, 'transferModal')">transfer</button>
-                    <button ng-if="envelopes.length >= 1" ng-click="showModal(true, 'makePurchase')">make purchase</button>
                     <button ng-if="envelopes.length >= 1" ng-click="reset()">*Reset All</button>
-                    <button ng-click="showNotify('success')">show success notify</button>
-                    <button ng-click="showNotify('error')">show error notify</button>
-                    <button ng-click="showNotify('ays')">show are you sure notify</button>
                     <form id="fdata" name="fdata" ng-submit="createEnvelope()">
                         <input type="text" required ng-model="fdata.title" placeholder="New Envelope Title"/>
                         <button type="submit"><i class="fas fa-plus"></i></button>

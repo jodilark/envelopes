@@ -1,12 +1,23 @@
 angular.module('suboption', []).directive('optionSelector', function(subOptions, $compile){
     return {
         restrict: 'AE',
-        scope: {vm: '='},
+        scope: {},
         link: function($scope, element, attr){
-            $scope.showOptions = false;
-            $scope.option = JSON.parse(attr.optionSelector).vm;
-            $scope.buttons = subOptions.getButtons();
             var bool;
+            $scope.showOptions = false;
+            $scope.option = JSON.parse(attr.optionSelector);
+
+            //////////////////////////
+            // Get specific buttons
+            switch($scope.option.type){
+                case 'envelope':
+                $scope.buttons = subOptions.getButtons().envelope;
+                break;
+                case 'master':
+                $scope.buttons = subOptions.getButtons().master;
+                $(element[0]).addClass('master_buttons');
+                break;
+            }
 
             //////////
             // Render

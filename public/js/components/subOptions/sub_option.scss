@@ -7,6 +7,7 @@
     justify-content: space-between;
     align-items: center;
     border: 1px dashed pink;
+    width: fit-content;
     section {
         margin: 0px 5px;
     }
@@ -28,4 +29,8 @@
         justify-content: center;
         align-items: center;
     }
+}
+.master_buttons .options_container {
+    bottom: -50px;
+    left: 20px;
 }

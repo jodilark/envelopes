@@ -39,6 +39,14 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         $scope.showModal(true, 'envActionModal', envelope, type);
     });
 
+    $scope.$on('masterBalanceModal', function(referenceScope, envelope, type){
+        $scope.showModal(true, 'masterBalanceModal');
+    });
+
+    $scope.$on('transferModal', function(referenceScope, envelope, type){
+        $scope.showModal(true, 'transferModal');
+    });
+
     $scope.createEnvelope = function(){
         $scope.toggleNav();
         envelopeFactory.createEnvelope($scope.fdata, 'fdata').then(function(res){
