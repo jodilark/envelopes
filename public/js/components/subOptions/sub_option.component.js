@@ -1,38 +1,45 @@
-angular.module('suboption', []).component('optionSelector', {
-    templateUrl: '../js/components/subOptions/sub_option.html',
-    controller: function($scope, subOptions){
-        $scope.showOptions = false;
-        $scope.buttons = subOptions.getButtons();
-        $('document').ready(() => {
-            _.forEach($scope.buttons, (e, i) => {
-                $('#' + e.id).css('background', e.background);
-            })
-        });
-
-        var bool;
-        $('.subOption_container').click(function(el){   
-            $scope.showOptions = !$scope.showOptions;
-            setTimeout(function(){
-                $scope.$apply()
-            })
-            return $scope.showOptions ? setListener() : hideLinks();
-        });
-    
-        function setListener(){
-            bool = true;
-            document.addEventListener("click", hideLinks);
-        }
-
-        function hideLinks(){
-            if(bool){
-                bool = false;
-                return;
-            }
+angular.module('suboption', []).directive('optionSelector', function(subOptions, $compile){
+    return {
+        restrict: 'AE',
+        scope: {vm: '='},
+        link: function($scope, element, attr){
             $scope.showOptions = false;
-            setTimeout(function(){
-                $scope.$apply()
-            })
-            document.removeEventListener("click", hideLinks);
+            $scope.option = JSON.parse(attr.optionSelector).vm;
+            $scope.buttons = subOptions.getButtons();
+            var bool;
+
+            //////////
+            // Render
+            $('document').ready(() => render(element[0]));
+            function render(el){
+                var optionsHtml = '<ng-include src="' + "'js/components/subOptions/sub_option.html'" + '"></ng-include>',
+                compiled = $compile(optionsHtml)($scope);
+                $(el).append(compiled);
+            }
+            
+            /////////////////
+            // Event Handlers
+            $(element).click(function(el){ 
+                $scope.showOptions = !$scope.showOptions;
+                _.forEach($scope.buttons, (button) => {
+                    $('.' + button.id).css('background', button.background);
+                });
+                $scope.$apply();
+                return $scope.showOptions ? setListener() : hideLinks();
+            });
+
+        
+            function setListener(){
+                bool = true;
+                document.addEventListener("click", hideLinks);
+            }
+
+            function hideLinks(){
+                if(bool) return bool = false;
+                $scope.showOptions = false;
+                setTimeout($scope.$apply());
+                document.removeEventListener("click", hideLinks);
+            }
         }
     }
 });

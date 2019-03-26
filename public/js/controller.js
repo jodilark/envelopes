@@ -12,12 +12,15 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         $scope.navVisible = !$scope.navVisible;
     }
     
-    $scope.showModal = function(visibility, modal, envelope){
+    $scope.showModal = function(visibility, modal, envelope, type){
         if($scope.navVisible){
             $scope.toggleNav();
         }
         if(envelope){
             $scope.originEnvelope = envelope;
+        }
+        if(type){
+            $scope.type = type;
         }
         $scope[modal] = visibility;
     };
@@ -34,6 +37,10 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
 
     $scope.$on('combinedModal', function(referenceScope, envelope){
         $scope.showModal(true, 'combinedModal', envelope);
+    });
+
+    $scope.$on('envActionModal', function(referenceScope, envelope, type){
+        $scope.showModal(true, 'envActionModal', envelope, type);
     });
 
     $scope.createEnvelope = function(){

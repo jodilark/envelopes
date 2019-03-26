@@ -1,5 +1,5 @@
-<div ng-show="showOptions">
+<div ng-show="showOptions" class="options_container">
     <section ng-repeat="button in buttons">
-        <article id="{{button.id}}" ng-click="button.action()"><p>{{button.text}}</p></article>
+        <article class="{{button.id}}" ng-click="button.action(option)"><p>{{button.text}}</p></article>
     </section>
 </div>
