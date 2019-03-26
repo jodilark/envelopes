@@ -35,10 +35,6 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         store.resetAll();
     };
 
-    $scope.$on('combinedModal', function(referenceScope, envelope){
-        $scope.showModal(true, 'combinedModal', envelope);
-    });
-
     $scope.$on('envActionModal', function(referenceScope, envelope, type){
         $scope.showModal(true, 'envActionModal', envelope, type);
     });
