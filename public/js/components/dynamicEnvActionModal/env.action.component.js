@@ -41,7 +41,7 @@ angular.module('billbo').component('envActionModal', {
         }
 
         $scope.submit = function(){
-            let from = $scope.vm.originEnvelope.id, 
+            let from = $scope.vm.originEnvelope.vm.id, 
             to = $scope[$scope.formId].fromEnvelope ? $scope[$scope.formId].fromEnvelope.id : null, 
             amount = Number($scope[$scope.formId].amount.$viewValue);
             
@@ -51,13 +51,13 @@ angular.module('billbo').component('envActionModal', {
             } else {
                 let description = $scope[$scope.formId].description.$viewValue,
                     historyObj = {
-                        "from_title": $scope.vm.originEnvelope.title_value,
+                        "from_title": $scope.vm.originEnvelope.vm.title_value,
                         "description": description,
                         "amount": amount,
                         "date": new Date()
                     };     
                 store.createHistory(historyObj).then(response => {
-                    store.updateEnvelope(from, {amountValue: (Number($scope.vm.originEnvelope.amount_value) - amount)}).then(() => {
+                    store.updateEnvelope(from, {amountValue: (Number($scope.vm.originEnvelope.vm.amount_value) - amount)}).then(() => {
                         $scope.$root.$broadcast('updateHistory');
                         $scope.closeModal();
                     });
