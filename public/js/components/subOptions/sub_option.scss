@@ -1,0 +1,36 @@
+.options_container{
+    position: absolute;
+    top: 37px;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+    z-index: 1;
+    section {
+        margin: 5px 0px;
+    }
+    section:first-child {
+        margin: 0px 0px 5px 0px;
+    }
+    section:last-child {
+        margin: 5px 0px 0px 0px;
+    }
+    & article {
+        height: 50px;
+        width: 50px;
+        color: white;
+        background: black;
+        border-radius: 50%;
+        border: 1px solid rgb(150, 150, 150);
+        box-shadow: rgba(66, 66, 66, 0.5) 3px 3px 3px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+    }
+}
+.master_buttons .options_container {
+    left: 220px;
+}

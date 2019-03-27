@@ -6,7 +6,7 @@
                     <select ng-model="fromEnvelope" ng-change="onChange()" ng-options="envelope.title_value + ':     ' + envelope.amount_value for envelope in envelopes">
                         <option value="">----- From -----</option>
                     </select>
-                    <input type="number" ng-model="fromFValue" name="fromValue" placeholder="0.00"/>
+                    <input type="number" step="0.01" ng-model="fromFValue" name="fromValue" placeholder="0.00" required/>
                 </article>
                 <article ng-if="fromFValue">
                     <select ng-model="toEnvelope" ng-change="setTo(toEnvelope)" required ng-options="envelope.title_value + ':     ' + envelope.amount_value for envelope in toEnvelopes">

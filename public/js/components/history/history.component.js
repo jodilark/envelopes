@@ -4,7 +4,7 @@ angular.module('billbo').component('history', {
         function updateHistory(){
             $scope.disableDelete = true;
             store.getHistory().then(response => {
-                $scope.history = response.data;
+                $scope.history = _.reverse(response.data);
                 _.forEach($scope.history, function(e, i){
                     e.date = $filter('date')(e.date, 'mediumDate');
                 });
