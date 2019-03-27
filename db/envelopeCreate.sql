@@ -5,8 +5,12 @@
         visible, 
         color_r, 
         color_g, 
-        color_b
+        color_b,
+        creditRecursionDate,
+        creditRecursionAmount,
+        debitRecursionDate,
+        debitRecursionAmount
     )
     VALUES
-    ($1, $2, $3, $4, $5, $6)
+    ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 	;

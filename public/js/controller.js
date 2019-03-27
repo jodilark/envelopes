@@ -6,6 +6,10 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         let master = _.find(store.data.envelopes, {id:1});
         $scope.balance = Number(master.amount_value);
         $scope.envelopes = store.data.envelopes;
+        $scope.consolidated = 0;
+        _.forEach(store.data.envelopes, env => {
+            $scope.consolidated += Number(env.amount_value);
+        });
     });
 
     $scope.toggleNav = function(){
@@ -37,6 +41,10 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
 
     $scope.$on('envActionModal', function(referenceScope, envelope, type){
         $scope.showModal(true, 'envActionModal', envelope, type);
+    });
+
+    $scope.$on('autoActionModal', function(referenceScope, envelope, type){
+        $scope.showModal(true, 'autoActionModal', envelope, type);
     });
 
     $scope.$on('masterBalanceModal', function(referenceScope, envelope, type){

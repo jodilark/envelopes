@@ -23,8 +23,27 @@ function subOptions($rootScope, envelopeFactory){
                     }
                 },
                 {
-                    text: 'delete',
+                    text: 'auto debit',
                     id: 'option_three',
+                    icon: 'fa fa-coins',
+                    background: 'aqua',
+                    action: function(env){
+                        console.log('auto debit from master');
+                    }
+                },
+                {
+                    text: 'auto credit',
+                    id: 'option_four',
+                    icon: 'fa fa-donate',
+                    background: 'orange',
+                    action: function(env){
+                        console.log('auto credit from master');
+                        $rootScope.$broadcast('autoActionModal', env.vm, 'start credit');
+                    }
+                },
+                {
+                    text: 'delete',
+                    id: 'option_five',
                     icon: 'fa fa-trash',
                     background: 'red',
                     action: function(env){

@@ -19,6 +19,7 @@
             <nav>
                 <i class="fas fa-bars" ng-click="toggleNav()"></i>
                 <section ng-show="navVisible">
+                    <div>Consolidated Total {{consolidated | currency}}</div>
                     <button ng-if="envelopes.length >= 1" ng-click="reset()">*Reset All</button>
                     <form id="fdata" name="fdata" ng-submit="createEnvelope()">
                         <input type="text" required ng-model="fdata.title" placeholder="New Envelope Title" autofocus/>
@@ -33,6 +34,7 @@
         <master-balance-modal ng-if="masterBalanceModal"></master-balance-modal>
         <make-purchase-modal ng-if="makePurchase"></make-purchase-modal>
         <env-action-modal ng-if="envActionModal" origin-envelope="originEnvelope" type="type"></env-action-modal>
+        <auto-actions ng-if="autoActionModal" origin-envelope="originEnvelope" type="type"></auto-actions>
         <div id="envelope_main" ng-if="envelopes.length > 1">
             <div id="envelope_list">
                 <section ng-if="envelope.visible" ng-repeat="envelope in envelopes">
