@@ -15,7 +15,7 @@
     <notification-container ng-if="showNotification" type="type"></notification-container>
     <div id="app_container">
         <header>
-            <h1 option-selector='{"type":"master"}'>Balance: {{balance}}</h1>
+            <h1 option-selector='{"type":"master"}'>Balance: {{balance | currency}}</h1>
             <nav>
                 <i class="fas fa-bars" ng-click="toggleNav()"></i>
                 <section ng-show="navVisible">

@@ -4,7 +4,7 @@
             <div class="env-title">{{vm.env.title_value}}</div>
         </span>
         <div class="env-body">
-            <div name="balance" class="env-amount">{{vm.env.amount_value ? vm.env.amount_value : '0.00'}}</div>
+            <div name="balance" class="env-amount">{{vm.env.amount_value ? vm.env.amount_value : '0.00' | currency}}</div>
         </div>
     </div>
 </div>
