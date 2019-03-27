@@ -69,4 +69,5 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
             setTimeout(() => $scope.$apply())
         }
     });    
+
 });

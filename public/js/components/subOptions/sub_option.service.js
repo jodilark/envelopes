@@ -7,25 +7,28 @@ function subOptions($rootScope, envelopeFactory){
                 {
                     text: 'Purchase',
                     id: 'option_one',
+                    icon: 'fa fa-credit-card',
                     background: 'blue',
                     action: function(env){
-                        $rootScope.$broadcast('envActionModal', env, 'purchase');
+                        $rootScope.$broadcast('envActionModal', env.vm, 'purchase');
                     }
                 },
                 {
                     text: 'Add Funds',
                     id: 'option_two',
+                    icon: 'fa fa-plus',
                     background: 'green',
                     action: function(env){
-                        $rootScope.$broadcast('envActionModal', env, 'addFunds');
+                        $rootScope.$broadcast('envActionModal', env.vm, 'addFunds');
                     }
                 },
                 {
                     text: 'delete',
                     id: 'option_three',
+                    icon: 'fa fa-trash',
                     background: 'red',
                     action: function(env){
-                        envelopeFactory.deleteEnvelope(env)
+                        envelopeFactory.deleteEnvelope(env.vm)
                     }
                 }
             ],
@@ -33,18 +36,18 @@ function subOptions($rootScope, envelopeFactory){
                 {
                     text: 'Add Funds',
                     id: 'master_option_one',
+                    icon: 'fa fa-plus',
                     background: 'blue',
                     action: function(env){
-                        console.log('master')
                         $rootScope.$broadcast('masterBalanceModal');
                     }
                 },
                 {
                     text: 'transfer',
                     id: 'master_option_two',
+                    icon: 'fa fa-exchange-alt',
                     background: 'red',
                     action: function(env){
-                        console.log('transfer')
                         $rootScope.$broadcast('transferModal');
                     }
                 }

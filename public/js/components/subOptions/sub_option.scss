@@ -1,22 +1,21 @@
 .options_container{
     position: absolute;
-    bottom: -58px;
-    right: -19px;
+    top: 37px;
+    right: 5px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border: 1px dashed pink;
     width: fit-content;
     z-index: 1;
     section {
-        margin: 0px 5px;
+        margin: 5px 0px;
     }
     section:first-child {
-        margin: 0px 5px 0px 0px;
+        margin: 0px 0px 5px 0px;
     }
     section:last-child {
-        margin: 0px 0px 0px 5px;
+        margin: 5px 0px 0px 0px;
     }
     & article {
         height: 50px;
@@ -29,9 +28,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        font-size: 32px;
     }
 }
 .master_buttons .options_container {
-    bottom: -50px;
-    left: 20px;
+    left: 220px;
 }

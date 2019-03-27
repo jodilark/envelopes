@@ -7,7 +7,7 @@ body {
     #app_container {
         color: white;
         background: rgb(94, 96, 107);
-        height: 100vh;
+        height: 120vh;
         overflow-y: scroll;
         overflow-x: hidden;
         h1 {
@@ -106,7 +106,7 @@ textarea {
 
 //ENVELOPES
 div#envelope_main {
-    margin-top: 39px;
+    margin-top: 65px;
     max-height: 620px;
     display: inline-block;
     width: 100%;
@@ -114,20 +114,23 @@ div#envelope_main {
         display: flex;
         flex-wrap: wrap;
         align-content: flex-start;
+        justify-content: center;
         width: 100%;
         overflow-y: scroll;
-        height: 400px;
+        height: 346px;
         & .env-wrapper {
             display: inline-block;
             border: 1px solid rgb(150, 150, 150);
             box-shadow: rgba(66, 66, 66, 0.5) 3px 3px 3px;
-            min-width: 114px;
             margin: 5px;
             position: relative;
+            width: 100px;
+            min-height: 68px;
             .env-modal-header {
                 display: flex;
                 justify-content: space-between;
                 padding: 3px;
+                min-height: 42px;
             }
             .env-title, .env-body{
                 cursor: pointer;
@@ -173,6 +176,9 @@ main#modal {
             float: right;
             button:first-child {
                 margin-right: 5px;
+            }
+            button {
+                text-transform: capitalize;
             }
         }
     }
@@ -221,7 +227,7 @@ header.grid_header {
 #history_two {
     width: initial;
     max-width: 600px;
-    max-height: 200px;
+    max-height: 250px;
     overflow: auto;
     padding: 0px 5px;
     position: relative;

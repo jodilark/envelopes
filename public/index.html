@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes" />
     <title>Document</title>
     <link rel="stylesheet" href="./dist/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -20,7 +21,7 @@
                 <section ng-show="navVisible">
                     <button ng-if="envelopes.length >= 1" ng-click="reset()">*Reset All</button>
                     <form id="fdata" name="fdata" ng-submit="createEnvelope()">
-                        <input type="text" required ng-model="fdata.title" placeholder="New Envelope Title"/>
+                        <input type="text" required ng-model="fdata.title" placeholder="New Envelope Title" autofocus/>
                         <button type="submit"><i class="fas fa-plus"></i></button>
                     </form>
                 </section>
