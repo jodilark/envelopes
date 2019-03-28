@@ -28,7 +28,6 @@ function subOptions($rootScope, envelopeFactory){
                     icon: 'fa fa-coins',
                     background: 'aqua',
                     action: function(env){
-                        console.log('auto debit from master');
                     }
                 },
                 {
@@ -37,7 +36,6 @@ function subOptions($rootScope, envelopeFactory){
                     icon: 'fa fa-donate',
                     background: 'orange',
                     action: function(env){
-                        console.log('auto credit from master');
                         $rootScope.$broadcast('autoActionModal', env.vm, 'start credit');
                     }
                 },

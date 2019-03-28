@@ -13,9 +13,9 @@
 		, color_g int
 		, color_b int
 		, creditRecursionDate int
-		, creditRecursionAmount int
+		, creditRecursionAmount numeric(7,2)
 		, debitRecursionDate int
-		, debitRecursionAmount int
+		, debitRecursionAmount numeric(7,2)
 	);
 	INSERT INTO envelopes
     (
