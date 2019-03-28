@@ -16,11 +16,7 @@ exports.create = (req, res) => {
                 rb.visible,
                 rb.color.r,
                 rb.color.g,
-                rb.color.b,
-                rb.creditrecursiondate,
-                rb.creditrecursionamount,
-                rb.debitrecursiondate,
-                rb.debitrecursionamount
+                rb.color.b
             ];
             if(rb.color.r > 255 || rb.color.g > 255 || rb.color.b > 255){
                 res.status(400).send('color value cannot be greater than 255');
@@ -49,10 +45,8 @@ exports.updateEnvelope = (req, res) => {
             color_r = (rb.color_r === env.color_r || !rb.color_r ? env.color_r: rb.color_r),
             color_g = (rb.color_g === env.color_g || !rb.color_g ? env.color_g: rb.color_g),
             color_b = (rb.color_b === env.color_b || !rb.color_b ? env.color_b: rb.color_b),
-            creditrecursiondate = (rb.creditrecursiondate === env.creditrecursiondate || !rb.creditrecursiondate ? env.creditrecursiondate: rb.creditrecursiondate),
-            creditrecursionamount = (rb.creditrecursionamount === env.creditrecursionamount || !rb.creditrecursionamount ? env.creditrecursionamount: rb.creditrecursionamount),
-            debitrecursiondate = (rb.debitrecursiondate === env.debitrecursiondate || !rb.debitrecursiondate ? env.debitrecursiondate: rb.debitrecursiondate),
-            debitrecursionamount = (rb.debitrecursionamount === env.debitrecursionamount || !rb.debitrecursionamount ? env.debitrecursionamount: rb.debitrecursionamount)
+            creditRecursionId = rb.creditRecursionId,
+            debitRecursionId = rb.debitRecursionId
         ];
         if(rb.color_r > 255 || rb.color_g > 255 || rb.color_b > 255){
             res.status(400).send('color_r value cannot be greater than 255');
