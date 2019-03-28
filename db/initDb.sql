@@ -16,6 +16,8 @@
 		, color_b int
 		, creditRecursionId int
 		, debitRecursionId int
+		, creditDay int
+		, debitDay int
 	);
 	INSERT INTO envelopes
     (
@@ -26,10 +28,12 @@
         color_g, 
         color_b,
 		creditRecursionId,
-		debitRecursionId
+		debitRecursionId,
+		creditDay,
+		debitDay
     )
     VALUES
-    ('Master Balance', 0, false, null, null, null, null, null)
+    ('Master Balance', 0, false, null, null, null, null, null, null, null)
 	;
 -- HISTORY
 	CREATE TABLE IF NOT EXISTS history

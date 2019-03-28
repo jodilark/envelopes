@@ -7,5 +7,7 @@ SET title_value = $2
 , color_b = $7
 , creditRecursionId = $8
 , debitRecursionId = $9
+, creditDate = $10
+, debitDate = $11
 WHERE id = $1
 ;

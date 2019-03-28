@@ -14,6 +14,8 @@ function envelopeFactory($q, balances, store, $http, notification){
             };
             this.creditRecursionId = null;
             this.debitRecursionId = null;
+            this.creditDay = null;
+            this.debitDay = null;
         }
 
         formData(){
