@@ -1,6 +1,8 @@
 -- SCHEMA DELETE
 	DROP TABLE IF EXISTS envelopes CASCADE;
 	DROP TABLE IF EXISTS history CASCADE;
+	DROP TABLE IF EXISTS autocredit CASCADE;
+	DROP TABLE IF EXISTS autodebit CASCADE;
 	DROP FUNCTION IF EXISTS TransferBalance(FromAccountId INT, ToAccountId INT, Amount NUMERIC(7,2));
 -- ENVELOPES
 	CREATE TABLE IF NOT EXISTS envelopes
@@ -12,10 +14,8 @@
 		, color_r int
 		, color_g int
 		, color_b int
-		, creditRecursionDate int
-		, creditRecursionAmount numeric(7,2)
-		, debitRecursionDate int
-		, debitRecursionAmount numeric(7,2)
+		, creditRecursionId int
+		, debitRecursionId int
 	);
 	INSERT INTO envelopes
     (
@@ -25,14 +25,13 @@
         color_r, 
         color_g, 
         color_b,
-		creditRecursionDate,
-		creditRecursionAmount,
-		debitRecursionDate,
-		debitRecursionAmount
+		creditRecursionId,
+		debitRecursionId
     )
     VALUES
-    ('Master Balance', 0, false, null, null, null, null, null, null, null)
+    ('Master Balance', 0, false, null, null, null, null, null)
 	;
+-- HISTORY
 	CREATE TABLE IF NOT EXISTS history
 	(
 		id serial primary key
@@ -60,3 +59,20 @@
 	$$
 	LANGUAGE plpgsql;
 
+-- AUTO CREDIT
+	CREATE TABLE IF NOT EXISTS autocredit
+	(
+		id serial primary key
+		, envelopeid int
+		, amount numeric(7,2)
+		, dayofmonth int
+	);
+
+-- AUTO DEBIT
+	CREATE TABLE IF NOT EXISTS autodebit
+	(
+		id serial primary key
+		, envelopeid int
+		, amount numeric(7,2)
+		, dayofmonth int
+	);
