@@ -18,7 +18,7 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         var creditIds;
         var credits = [];
         store.getCredits().then(response => {
-            debugger
+            console.log(response.data)
         });
     }
 
