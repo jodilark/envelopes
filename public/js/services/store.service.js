@@ -60,6 +60,17 @@ function store(){
                 return $http.delete('/api/deleteHistory?id=' + id);
             }
 
+            function createCredit (transPayload, envelope) {
+                return $http.post('/api/createCredit', transPayload).then(response => {
+                    envelope.creditRecursionId = response.data[0].id;
+                    updateEnvelope(transPayload.envelopeid, envelope);
+                });
+            }
+
+            function getCredits (){
+                return $http.get('/api/credits');
+            }
+
             return {
                 data: data,
                 resetAll:resetAll,
@@ -69,7 +80,9 @@ function store(){
                 transferBalance:transferBalance,
                 createHistory:createHistory,
                 getHistory:getHistory,
-                deleteHistory:deleteHistory
+                deleteHistory:deleteHistory,
+                createCredit:createCredit,
+                getCredits:getCredits
             }
         }
     }

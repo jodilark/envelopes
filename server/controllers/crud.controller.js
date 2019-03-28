@@ -16,7 +16,9 @@ exports.create = (req, res) => {
                 rb.visible,
                 rb.color.r,
                 rb.color.g,
-                rb.color.b
+                rb.color.b,
+                rb.creditRecursionId,
+                rb.debitRecursionId
             ];
             if(rb.color.r > 255 || rb.color.g > 255 || rb.color.b > 255){
                 res.status(400).send('color value cannot be greater than 255');

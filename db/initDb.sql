@@ -66,6 +66,7 @@
 		, envelopeid int
 		, amount numeric(7,2)
 		, dayofmonth int
+		, description varchar
 	);
 
 -- AUTO DEBIT
@@ -75,4 +76,5 @@
 		, envelopeid int
 		, amount numeric(7,2)
 		, dayofmonth int
+		, description varchar
 	);

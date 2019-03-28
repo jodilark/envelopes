@@ -8,6 +8,7 @@ const port = config.appPort;
 const crud = require('./server/controllers/crud.controller');
 const history = require('./server/controllers/crud.history.controller');
 const features = require('./features');
+const autoTransaction = require('./server/controllers/crud.autoTransaction');
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 
@@ -30,6 +31,10 @@ app.get('/api/getEnvelopes', crud.getEnvelopes);
 app.put('/api/updateEnvelope', crud.updateEnvelope);
 app.put('/api/transferBalance', crud.transferBalance);
 app.delete('/api/deleteEnvelope', crud.deleteEnvelope);
+
+//AUTOTRANSACTION CREDIT
+app.post('/api/createCredit', autoTransaction.createCredit);
+app.get('/api/credits', autoTransaction.credits);
 
 //HISTORY
 app.get('/api/getHistory', history.getHistory);

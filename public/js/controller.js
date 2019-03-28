@@ -10,6 +10,16 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         _.forEach(store.data.envelopes, env => {
             $scope.consolidated += Number(env.amount_value);
         });
+        const today = new Date().getDate();
+        var credits;
+        store.getCredits().then(response => {
+            credits = _.filter(response.data, credit => {
+                if(credit.dayofmonth === today){
+                    return credit;
+                }
+            })
+            console.log(credits)
+        });
     });
 
     $scope.toggleNav = function(){

@@ -21,14 +21,17 @@ angular.module('billbo').component('autoActions', {
         $scope.submit = function(){
             //update envelope
             if($scope.autoCredit){
-                $scope.aa.originEnvelope.creditrecursionamount = $scope.amount;
-                $scope.aa.originEnvelope.creditrecursiondate = $scope.dayOfMonth;
+                //create transaction
+                var transPayload = {
+                    "envelopeid": $scope.aa.originEnvelope.id,
+                    "amount": $scope.amount,
+                    "dayofmonth": $scope.dayOfMonth,
+                    "description": $scope.transDescription
+                }
+                store.createCredit(transPayload, $scope.aa.originEnvelope).then($scope.closeModal())
             } else if($scope.autoDebit){
-                $scope.aa.originEnvelope.debitrecursionamount = $scope.amount;
-                $scope.aa.originEnvelope.debitrecursiondate = $scope.dayOfMonth;
+                // $scope.aa.originEnvelope.debitrecursionid
             }
-            var today = new Date().getDate();
-            store.updateEnvelope($scope.aa.originEnvelope.id, $scope.aa.originEnvelope).then($scope.closeModal());
         }
     }
 });
