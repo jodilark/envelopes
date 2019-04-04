@@ -12,7 +12,7 @@ angular.module('billbo').component('autoActions', {
             } else if ($scope.aa.type === 'start debit'){
                 $scope.formId = 'autoDebit';
             }
-        })
+        }, 100);
 
         $scope.closeModal = function(){
             document.getElementById($scope.formId).reset();

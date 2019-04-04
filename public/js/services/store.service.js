@@ -62,7 +62,7 @@ function store(){
 
             function createCredit (transPayload, envelope) {
                 return $http.post('/api/createCredit', transPayload).then(response => {
-                    envelope.creditRecursionId = response.data[0].id;
+                    // envelope.lastCreditDay = response.data[0].id;
                     updateEnvelope(transPayload.envelopeid, envelope);
                 });
             }

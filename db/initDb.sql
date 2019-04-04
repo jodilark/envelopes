@@ -14,8 +14,8 @@
 		, color_r int
 		, color_g int
 		, color_b int
-		, creditRecursionId int
-		, debitRecursionId int
+		, lastCreditDay int
+		, lastDebitDay int
 		, creditDay int
 		, debitDay int
 	);
@@ -27,8 +27,8 @@
         color_r, 
         color_g, 
         color_b,
-		creditRecursionId,
-		debitRecursionId,
+		lastCreditDay,
+		lastDebitDay,
 		creditDay,
 		debitDay
     )
@@ -82,3 +82,6 @@
 		, dayofmonth int
 		, description varchar
 	);
+
+-- select autocredit.id, autocredit.amount, autocredit.dayofmonth, autocredit.description, envelopes.id as envid, envelopes.creditDay from autocredit inner join envelopes on autocredit .envelopeid = envelopes.id where envelopes.creditday = autocredit.dayofmonth
+-- update envelopes set creditday = 13 where id = 2 returning *

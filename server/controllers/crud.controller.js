@@ -17,8 +17,8 @@ exports.create = (req, res) => {
                 rb.color.r,
                 rb.color.g,
                 rb.color.b,
-                rb.creditRecursionId,
-                rb.debitRecursionId,
+                rb.lastCreditDay,
+                rb.lastDebitDay,
                 rb.creditDate,
                 rb.debitDate
             ];
@@ -49,10 +49,10 @@ exports.updateEnvelope = (req, res) => {
             color_r = (rb.color_r === env.color_r || !rb.color_r ? env.color_r: rb.color_r),
             color_g = (rb.color_g === env.color_g || !rb.color_g ? env.color_g: rb.color_g),
             color_b = (rb.color_b === env.color_b || !rb.color_b ? env.color_b: rb.color_b),
-            creditRecursionId = rb.creditRecursionId,
-            debitRecursionId = rb.debitRecursionId,
-            creditDate = rb.creditDate,
-            debitRecursionId = rb.debitDate
+            lastCreditDay = rb.lastCreditDay,
+            lastDebitDay = rb.lastDebitDay,
+            creditday = rb.creditday,
+            debitday = rb.debitday
         ];
         if(rb.color_r > 255 || rb.color_g > 255 || rb.color_b > 255){
             res.status(400).send('color_r value cannot be greater than 255');
