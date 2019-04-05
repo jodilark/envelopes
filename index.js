@@ -9,6 +9,7 @@ const crud = require('./server/controllers/crud.controller');
 const history = require('./server/controllers/crud.history.controller');
 const features = require('./features');
 const autoTransaction = require('./server/controllers/crud.autoTransaction');
+const cron = require('./server/controllers/cron');
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 
@@ -43,6 +44,32 @@ app.delete('/api/deleteHistory', history.deleteHistoryById);
 
 //features
 app.get('/features', (req, res) => res.status(200).send(features));
+
+//cron
+/*
+s = seconds,
+m = minutes,
+h = hours,
+d = days,
+mo = months,
+*/
+// cron.schedule(5, 's', cron.doThing);
+// setTimeout(function(){
+//   cron.stop('interve')
+// }, 30000);
+
+app.put('/api/setTodayOnEnvelopes', (req, res) => {
+  let today = new Date().getDate();
+  req.app.get('db').setTodayOnEnvelopes(today).then(response => {
+    res.status(200).send(response)
+  })
+});
+
+app.get('/api/todaysCharges', (req, res) => {
+  req.app.get('db').autoCreditEnvelopeJoin().then(charges => {
+    res.status(200).send(charges)
+  })
+});
 
 app.listen(port, function(){
     console.log('listening on port: ', port);
