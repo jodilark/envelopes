@@ -28,3 +28,25 @@ exports.updateDebit = (req, res) => {
 exports.deleteDebit = (req, res) => {
 
 }
+
+//////////////////////////////////////////////
+// auto credit transaction related methods
+exports.setTodayOnEnvelopes = (req, res) => {
+    let today = new Date().getDate();
+    req.app.get('db').setTodayOnEnvelopes(today).then(response => {
+      res.status(200).send(response)
+    })
+}
+exports.todaysCredits = (req, res) => {
+    req.app.get('db').autoCreditEnvelopeJoin().then(credits => {
+        res.status(200).send(credits);
+    });
+}
+exports.updateEnvelopeCreditDay = (req, res) => {
+    let today = new Date().getDate();
+    // let today = null;
+    req.app.get('db').updateEnvelopeCredited(req.query.id, today).then(updated => {
+      console.log('envelope updated: ', updated);
+      res.status(200).send(updated);
+    });
+}

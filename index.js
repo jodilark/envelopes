@@ -53,23 +53,21 @@ h = hours,
 d = days,
 mo = months,
 */
-// cron.schedule(5, 's', cron.doThing);
+cron.schedule(1, 'm', cron.doThing);
 // setTimeout(function(){
 //   cron.stop('interve')
 // }, 30000);
 
-app.put('/api/setTodayOnEnvelopes', (req, res) => {
-  let today = new Date().getDate();
-  req.app.get('db').setTodayOnEnvelopes(today).then(response => {
-    res.status(200).send(response)
-  })
-});
+/////////////////////////////////////////////////////////////////
+// this should run every day to update the date on the envelopes
+app.put('/api/setTodayOnEnvelopes', autoTransaction.setTodayOnEnvelopes);
+app.get('/api/todaysCredits', autoTransaction.todaysCredits);
+app.get('/api/creditTransfer', crud.transferBalance);
+app.get('/api/updateEnvelopeCreditDay', autoTransaction.updateEnvelopeCreditDay);
 
-app.get('/api/todaysCharges', (req, res) => {
-  req.app.get('db').autoCreditEnvelopeJoin().then(charges => {
-    res.status(200).send(charges)
-  })
-});
+
+
+
 
 app.listen(port, function(){
     console.log('listening on port: ', port);

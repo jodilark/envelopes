@@ -60,6 +60,9 @@ exports.updateEnvelope = (req, res) => {
     }).catch(err => res.status(400).send(`there was an error getting this envelope ${err}`));
 };
 exports.transferBalance = (req, res) => {
+    if(req.query){
+        req.body = req.query.payload.split(',');
+    }
     // [FromAccountId, ToAccountId, Amount]
     req.app.get('db').transferBalance(req.body['0'], req.body['1'], req.body['2']).then(response => res.status(200).send('transaction complete')).catch(err => res.status(400).send(`Transaction did not complete: ${err}`));
 }
