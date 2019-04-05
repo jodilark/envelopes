@@ -53,10 +53,10 @@ h = hours,
 d = days,
 mo = months,
 */
-cron.schedule(1, 'm', cron.doThing);
-// setTimeout(function(){
-//   cron.stop('interve')
-// }, 30000);
+cron.schedule(10, 's', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
+setTimeout(function(){
+  cron.stop('autoCredit')
+}, 30000);
 
 /////////////////////////////////////////////////////////////////
 // this should run every day to update the date on the envelopes
