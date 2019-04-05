@@ -1,6 +1,6 @@
 exports.createCredit = (req, res) => {
     let rb = req.body
-    var thing = [rb.envelopeid, rb.amount, rb.dayofmonth, rb.description];
+    var thing = [rb.envelopeid, rb.amount, rb.dayofmonth, rb.description, rb.fromEnvelopeid];
     req.app.get('db').autoCreditCreate(thing).then(response => {
         res.status(200).send(response);
     });

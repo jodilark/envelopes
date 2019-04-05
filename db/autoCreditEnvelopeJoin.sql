@@ -2,7 +2,8 @@ SELECT
 autocredit.id, 
 autocredit.amount, 
 autocredit.dayofmonth, 
-autocredit.description, 
+autocredit.description,
+autocredit.fromEnvelopeid, 
 envelopes.id AS envid, 
 envelopes.creditDay 
 FROM autocredit 

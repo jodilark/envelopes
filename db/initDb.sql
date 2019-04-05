@@ -71,6 +71,7 @@
 		, amount numeric(7,2)
 		, dayofmonth int
 		, description varchar
+		, fromEnvelopeid int
 	);
 
 -- AUTO DEBIT
