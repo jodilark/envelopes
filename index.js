@@ -46,10 +46,10 @@ app.get('/features', (req, res) => res.status(200).send(features));
 s = seconds,
 m = minutes,
 h = hours,
-d = days,
-mo = months,
+d = days
 */
-// cron.schedule(10, 's', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
+// cron.schedule(1, 'h', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
+// cron.schedule(24, 'h', autoTransaction.intSetTodayOnEnvelopes, 'setEnvelopeDay');
 // setTimeout(function(){
 //   cron.stop('autoCredit')
 // }, 30000);

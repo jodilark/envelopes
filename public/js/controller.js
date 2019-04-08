@@ -10,17 +10,7 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         _.forEach(store.data.envelopes, env => {
             $scope.consolidated += Number(env.amount_value);
         });
-        handleCredits();
     });
-
-    function handleCredits(){
-        const today = new Date().getDate();
-        var creditIds;
-        var credits = [];
-        store.getCredits().then(response => {
-            console.log(response.data)
-        });
-    }
 
     $scope.toggleNav = function(){
         $scope.navVisible = !$scope.navVisible;

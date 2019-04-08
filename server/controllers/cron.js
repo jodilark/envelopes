@@ -1,14 +1,20 @@
-exports.schedule = (val, measument, fn, jobName) => {
-    switch(measument){
+exports.schedule = (val, measurement, fn, jobName) => {
+    switch(measurement){
         case 's':
         val *= 1000;
         break;
         case 'm':
         val *= 60000;
         break;
+        case 'h':
+        val *= 3600000;
+        break;
+        case 'd':
+        val *= 86400000;
+        break;
         default:
         val = null;
-        console.log('s, m, h, d, mo cannot equal null')
+        console.log('measurement cannot equal null');
         break;
     }
     

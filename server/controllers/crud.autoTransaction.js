@@ -12,17 +12,11 @@ exports.credits = (req, res) => {
         res.status(200).send(response);
     });
 }
-exports.updateCredit = (req, res) => {
-
-}
 exports.deleteCredit = (req, res) => {
     let id = req.query.id;
     req.app.get('db').autoCreditDelete(id).then(remainingCredits => {
         res.status(200).send(remainingCredits);
     });
-}
-exports.createDebit = (req, res) => {
-    req.app.get('db').autoDebitCreate(req)
 }
 
 exports.getCreditsByEnvId = (req, res) => {
@@ -32,23 +26,20 @@ exports.getCreditsByEnvId = (req, res) => {
     });
 };
 
-exports.getDebit = (req, res) => {
-
-}
-exports.updateDebit = (req, res) => {
-
-}
-exports.deleteDebit = (req, res) => {
-
-}
-
 //////////////////////////////////////////////
 // auto credit transaction related methods
-exports.setTodayOnEnvelopes = (req, res) => {
+exports.setTodayOnEnvelopes = (req, res) => { //external
+    console.log('setting today on envelopes');
     let today = new Date().getDate();
     req.app.get('db').setTodayOnEnvelopes(today).then(response => {
       res.status(200).send(response)
     })
+}
+exports.intSetTodayOnEnvelopes = (req, res) => { //internal
+    request({
+        method: 'PUT',
+        url: 'http://localhost:3000/api/setTodayOnEnvelopes'
+    });
 }
 exports.todaysCredits = (req, res) => {
     req.app.get('db').autoCreditEnvelopeJoin().then(credits => {
