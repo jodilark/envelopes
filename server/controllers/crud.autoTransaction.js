@@ -67,7 +67,9 @@ exports.checkEnvelopesForCredits = () => {
                     url: 'http://localhost:3000/api/todaysCredits'
                     }, function(error, response, body){
                         let rb = JSON.parse(response.body);
-                        checkTodaysCredits(envelope, rb);
+                        if(rb.length >= 1){
+                            checkTodaysCredits(envelope, rb);
+                        } else console.log('no credit found for: ', envelope.title_value)
                     }
                 );
             }

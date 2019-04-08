@@ -48,8 +48,8 @@ m = minutes,
 h = hours,
 d = days
 */
-// cron.schedule(1, 'h', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
-// cron.schedule(24, 'h', autoTransaction.intSetTodayOnEnvelopes, 'setEnvelopeDay');
+cron.schedule(1, 'h', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
+cron.schedule(24, 'h', autoTransaction.intSetTodayOnEnvelopes, 'setEnvelopeDay');
 // setTimeout(function(){
 //   cron.stop('autoCredit')
 // }, 30000);
