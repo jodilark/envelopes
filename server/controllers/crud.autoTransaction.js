@@ -48,7 +48,6 @@ exports.todaysCredits = (req, res) => {
 }
 exports.updateEnvelopeCreditDay = (req, res) => {
     let today = new Date().getDate();
-    // let today = null;
     req.app.get('db').updateEnvelopeCredited(req.query.id, today).then(updated => {
       console.log('envelope updated: ', updated);
       res.status(200).send(updated);
@@ -61,6 +60,7 @@ exports.checkEnvelopesForCredits = () => {
 
     function checkForPendingCredit(envelopeList){
         envelopeList.forEach(envelope => {
+            // purpose for lastcreditday is to check if we have already applied the credit for this month.
             if(envelope.lastcreditday !== today){
                 console.log('checking pending credit for: ', envelope.title_value);
                 request.get({

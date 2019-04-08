@@ -19,8 +19,8 @@ exports.create = (req, res) => {
                 rb.color.b,
                 rb.lastCreditDay,
                 rb.lastDebitDay,
-                rb.creditDate,
-                rb.debitDate
+                rb.creditDay,
+                rb.debitDay
             ];
             if(rb.color.r > 255 || rb.color.g > 255 || rb.color.b > 255){
                 res.status(400).send('color value cannot be greater than 255');
