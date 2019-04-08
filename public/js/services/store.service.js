@@ -71,6 +71,14 @@ function store(){
                 return $http.get('/api/credits');
             }
 
+            function getCreditsByEnvId (id){
+                return $http.get('/api/getCreditsByEnvId/?id=' + id);
+            }
+
+            function deleteCreditById (id) {
+                return $http.delete('/api/deleteCredit/?id=' + id);
+            }
+
             return {
                 data: data,
                 resetAll:resetAll,
@@ -82,7 +90,9 @@ function store(){
                 getHistory:getHistory,
                 deleteHistory:deleteHistory,
                 createCredit:createCredit,
-                getCredits:getCredits
+                getCredits:getCredits,
+                getCreditsByEnvId:getCreditsByEnvId,
+                deleteCreditById:deleteCreditById
             }
         }
     }

@@ -16,11 +16,22 @@ exports.updateCredit = (req, res) => {
 
 }
 exports.deleteCredit = (req, res) => {
-
+    let id = req.query.id;
+    req.app.get('db').autoCreditDelete(id).then(remainingCredits => {
+        res.status(200).send(remainingCredits);
+    });
 }
 exports.createDebit = (req, res) => {
     req.app.get('db').autoDebitCreate(req)
 }
+
+exports.getCreditsByEnvId = (req, res) => {
+    let id = req.query.id;
+    req.app.get('db').autoCreditGetByEnvId(id).then(credits => {
+        res.status(200).send(credits);
+    });
+};
+
 exports.getDebit = (req, res) => {
 
 }

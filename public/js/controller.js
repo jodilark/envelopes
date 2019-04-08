@@ -65,6 +65,13 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
         $scope.showModal(true, 'transferModal');
     });
 
+    $scope.$on('showCreditOrDebit', function(referenceScope, envelope, type){
+        store.getCreditsByEnvId(envelope.id).then(credits => {
+            let creditList = credits.data;
+            $scope.showModal(true, 'showCreditOrDebit', creditList, type);
+        });
+    });
+
     $scope.createEnvelope = function(){
         $scope.toggleNav();
         envelopeFactory.createEnvelope($scope.fdata, 'fdata').then(function(res){

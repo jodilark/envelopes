@@ -60,7 +60,7 @@ exports.updateEnvelope = (req, res) => {
     }).catch(err => res.status(400).send(`there was an error getting this envelope ${err}`));
 };
 exports.transferBalance = (req, res) => {
-    if(req.query){
+    if(req.query && !req.body){
         req.body = req.query.payload.split(',');
     }
     // [FromAccountId, ToAccountId, Amount]

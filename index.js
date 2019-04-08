@@ -33,10 +33,6 @@ app.put('/api/updateEnvelope', crud.updateEnvelope);
 app.put('/api/transferBalance', crud.transferBalance);
 app.delete('/api/deleteEnvelope', crud.deleteEnvelope);
 
-//AUTOTRANSACTION CREDIT
-app.post('/api/createCredit', autoTransaction.createCredit);
-app.get('/api/credits', autoTransaction.credits);
-
 //HISTORY
 app.get('/api/getHistory', history.getHistory);
 app.post('/api/createHistory', history.addHistoryRow);
@@ -53,16 +49,23 @@ h = hours,
 d = days,
 mo = months,
 */
-cron.schedule(10, 's', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
-setTimeout(function(){
-  cron.stop('autoCredit')
-}, 30000);
+// cron.schedule(10, 's', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
+// setTimeout(function(){
+//   cron.stop('autoCredit')
+// }, 30000);
+
+
+//AUTOTRANSACTION CREDIT
+app.post('/api/createCredit', autoTransaction.createCredit);
+app.get('/api/credits', autoTransaction.credits);
+app.get('/api/todaysCredits', autoTransaction.todaysCredits);
+app.get('/api/creditTransfer', crud.transferBalance);
+app.get('/api/getCreditsByEnvId', autoTransaction.getCreditsByEnvId);
+app.delete('/api/deleteCredit', autoTransaction.deleteCredit);
 
 /////////////////////////////////////////////////////////////////
 // this should run every day to update the date on the envelopes
 app.put('/api/setTodayOnEnvelopes', autoTransaction.setTodayOnEnvelopes);
-app.get('/api/todaysCredits', autoTransaction.todaysCredits);
-app.get('/api/creditTransfer', crud.transferBalance);
 app.get('/api/updateEnvelopeCreditDay', autoTransaction.updateEnvelopeCreditDay);
 
 

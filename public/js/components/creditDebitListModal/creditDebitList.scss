@@ -1,0 +1,37 @@
+
+.credit_debit_modal {
+    button:disabled {
+        background: lightslategray;
+        border-width: 1px;
+        color: #acacb3;
+    }
+
+    & .cd_list_container{
+        border: 1px solid black;
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+    .cdm_row {
+        display: grid;
+        grid-template-rows: 50px;
+        grid-template-columns: 96px 50px 50px auto;
+        padding: 5px;
+        & p:first-child {
+            justify-content: flex-start;
+        }
+        & p {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    }
+    .cdm_row:nth-child(odd) {
+        background: #272727;
+    }
+    .cdm_row:nth-child(even) {
+        background: #040404;
+    }
+    .cdm_row.select {
+        background: rgb(50, 0, 0);
+    }
+}

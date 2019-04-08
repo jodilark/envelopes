@@ -47,6 +47,15 @@ function subOptions($rootScope, envelopeFactory){
                     action: function(env){
                         envelopeFactory.deleteEnvelope(env.vm)
                     }
+                },
+                {
+                    text: 'auto credit list',
+                    id: 'option_six',
+                    icon: 'fas fa-hand-holding-usd',
+                    background: 'pink',
+                    action: function(env){
+                        $rootScope.$broadcast('showCreditOrDebit', env.vm, 'credit');
+                    }
                 }
             ],
             master: [
