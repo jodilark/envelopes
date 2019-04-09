@@ -5,16 +5,16 @@
                 {{header_title_value}}
             </header>
             <article class="cd_list_container">
-                <span id="cdm_row_{{row.id}}" class="cdm_row" ng-repeat="row in cdm.creditList" ng-click="toggleSelect(row.id)">
+                <span id="cdm_row_{{row.id}}" class="cdm_row" ng-repeat="row in cdm.transList" ng-click="toggleSelect(row.id)">
                     <p>{{row.description}}</p>
                     <p>{{row.amount | currency}}</p>
                     <p>{{row.dayofmonthword}}</p>
-                    <p>env: {{row.fromenvelopeid}}</p>
+                    <p ng-if="row.fromenvelopeid">env: {{row.fromenvelopeid}}</p>
                 </span>
             </article>
             <article>
                 <button ng-disabled="disableDelete" ng-click="delete(selectedCdRow)">Delete</button>
-                <button ng-click="closeModal()">Cancel</button>
+                <button ng-click="closeModal()">Close</button>
             </article>
         </section>
     </content>

@@ -56,10 +56,17 @@ angular.module('billbo').controller('main', function($scope, balances, _, envelo
     });
 
     $scope.$on('showCreditOrDebit', function(referenceScope, envelope, type){
-        store.getCreditsByEnvId(envelope.id).then(credits => {
-            let creditList = credits.data;
-            $scope.showModal(true, 'showCreditOrDebit', creditList, type);
-        });
+        if(type === 'credit'){
+            store.getCreditsByEnvId(envelope.id).then(credits => {
+                let creditList = credits.data;
+                $scope.showModal(true, 'showCreditOrDebit', creditList, type);
+            });
+        } else if(type === 'debit'){
+            store.getDebitsByEnvId(envelope.id).then(debits => {
+                let debitList = debits.data;
+                $scope.showModal(true, 'showCreditOrDebit', debitList, type);
+            });
+        }
     });
 
     $scope.createEnvelope = function(){

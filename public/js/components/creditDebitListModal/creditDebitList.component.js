@@ -1,6 +1,6 @@
 angular.module('billbo').component('showCreditDebitModal', {
     bindings: {
-        creditList: '<',
+        transList: '<',
         type: '<'
     },
     templateUrl: '../js/components/creditDebitListModal/creditDebitList.html',
@@ -28,7 +28,7 @@ angular.module('billbo').component('showCreditDebitModal', {
 
         
         function listSetup(){
-            wordifyDates($scope.cdm.creditList);
+            wordifyDates($scope.cdm.transList);
             setTimeout(function(){
                 $scope.$apply();
             });
@@ -36,16 +36,24 @@ angular.module('billbo').component('showCreditDebitModal', {
         setTimeout(function() {
             if($scope.cdm.type === 'credit'){
                 $scope.header_title_value = 'credit list';
+            } else if($scope.cdm.type === 'debit'){
+                $scope.header_title_value = 'debit list';
             }
             listSetup();
         });
 
-        function updateCreditList(deletedValue){
-            return store.getCreditsByEnvId(deletedValue.data[0].envelopeid).then(newList => {
-                $scope.cdm.creditList = newList.data;
+        function updatetransList(deletedValue){
+            let endpoint;
+            if($scope.header_title_value === 'credit list'){
+                endpoint = store.getCreditsByEnvId;
+            } else if($scope.header_title_value === 'debit list'){
+                endpoint = store.getDebitsByEnvId;
+            }
+            return endpoint(deletedValue.data[0].envelopeid).then(newList => {
+                $scope.cdm.transList = newList.data;
                 listSetup();
                 return $q.resolve();
-            })
+            });
         }
 
         $scope.closeModal = function(){
@@ -73,26 +81,27 @@ angular.module('billbo').component('showCreditDebitModal', {
         };
 
         $scope.delete = function(deleteId){
+            let deleteEndpoint, deleteType;
+            if($scope.header_title_value === 'credit list'){
+                deleteEndpoint = store.deleteCreditById;
+                deleteType = 'credit'
+            } else if($scope.header_title_value === 'debit list'){
+                deleteEndpoint = store.deleteDebitById;
+                deleteType = 'debit'
+            }
             function deleteIt(){
-                store.getCredits().then(res => {
-                    let creditToDelete = _.find(res.data, function(e){
-                        if(e.id === deleteId){
-                            return e;
-                        }
-                    });
-                    store.deleteCreditById(creditToDelete.id).then(updateCreditList)
-                    .then(() => {
-                        let context = {
-                            notifyType: 'success',
-                            notifyText: `Credit has been deleted successfully.`
-                        }
-                        notification.resolveNotificationType(context);
-                    });
+                deleteEndpoint(deleteId).then(updatetransList)
+                .then(() => {
+                    let context = {
+                        notifyType: 'success',
+                        notifyText: `${deleteType} has been deleted.`
+                    }
+                    notification.resolveNotificationType(context);
                 });
             }
             let context = {
                 notifyType: 'ays',
-                notifyText: `Do you really want to delete this credit?`,
+                notifyText: `Do you really want to delete this ${deleteType}?`,
                 buttons: [
                     {
                         text: 'YES',

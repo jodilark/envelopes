@@ -48,8 +48,8 @@ m = minutes,
 h = hours,
 d = days
 */
-cron.schedule(1, 'h', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
-cron.schedule(24, 'h', autoTransaction.intSetTodayOnEnvelopes, 'setEnvelopeDay');
+// cron.schedule(1, 'h', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
+// cron.schedule(24, 'h', autoTransaction.intSetTodayOnEnvelopes, 'setEnvelopeDay');
 // setTimeout(function(){
 //   cron.stop('autoCredit')
 // }, 30000);
@@ -68,7 +68,11 @@ app.delete('/api/deleteCredit', autoTransaction.deleteCredit);
 app.put('/api/setTodayOnEnvelopes', autoTransaction.setTodayOnEnvelopes);
 app.get('/api/updateEnvelopeCreditDay', autoTransaction.updateEnvelopeCreditDay);
 
-
+//AUTOTRANSACTION DEBIT
+app.post('/api/createDebit', autoTransaction.createDebit);
+app.get('/api/getDebitsByEnvId', autoTransaction.getDebitsByEnvId);
+app.get('/api/debits', autoTransaction.debits);
+app.delete('/api/deleteDebit', autoTransaction.deleteDebit);
 
 
 

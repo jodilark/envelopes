@@ -1,9 +1,11 @@
 const request = require('request');
 
+///////////////////////////////
+// CREDIT SETUP AND MANAGEMENT
 exports.createCredit = (req, res) => {
     let rb = req.body
-    var thing = [rb.envelopeid, rb.amount, rb.dayofmonth, rb.description, rb.fromEnvelopeid];
-    req.app.get('db').autoCreditCreate(thing).then(response => {
+    var payload = [rb.envelopeid, rb.amount, rb.dayofmonth, rb.description, rb.fromEnvelopeid];
+    req.app.get('db').autoCreditCreate(payload).then(response => {
         res.status(200).send(response);
     });
 }
@@ -25,6 +27,33 @@ exports.getCreditsByEnvId = (req, res) => {
         res.status(200).send(credits);
     });
 };
+
+///////////////////////////////
+// DEBIT SETUP AND MANAGEMENT
+exports.createDebit = (req, res) => {
+    let rb = req.body
+    var payload = [rb.envelopeid, rb.amount, rb.dayofmonth, rb.description];
+    req.app.get('db').autoDebitCreate(payload).then(response => {
+        res.status(200).send(response);
+    });
+};
+exports.getDebitsByEnvId = (req, res) => {
+    let id = req.query.id;
+    req.app.get('db').autoDebitGetByEnvId(id).then(debits => {
+        res.status(200).send(debits);
+    });
+};
+exports.debits = (req, res) => {
+    req.app.get('db').autoDebitGetAll().then(response => {
+        res.status(200).send(response);
+    });
+};
+exports.deleteDebit = (req, res) => {
+    let id = req.query.id;
+    req.app.get('db').autoDebitDelete(id).then(remainingDebits => {
+        res.status(200).send(remainingDebits);
+    });
+}
 
 //////////////////////////////////////////////
 // auto credit transaction related methods
