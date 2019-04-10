@@ -32,13 +32,12 @@ angular.module('billbo').component('autoActions', {
                 notifyType: 'success',
                 notifyText: `${$scope.transType} has been created.`
             }
-            notification.resolveNotificationType(context);
         }
-
+        
         $scope.onChange = function(fromEnvelope){
             $scope.fromEnvelope = fromEnvelope;
         }
-
+        
         $scope.submit = function(){
             //update envelope
             if($scope.autoCredit){
@@ -60,6 +59,7 @@ angular.module('billbo').component('autoActions', {
                     "description": $scope.transDescription
                 }
                 store.createDebit(transPayload, $scope.aa.originEnvelope).then($scope.closeModal);
+                notification.resolveNotificationType(context);
             }
         }
     }
