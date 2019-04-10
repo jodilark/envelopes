@@ -28,6 +28,7 @@ function subOptions($rootScope, envelopeFactory){
                     icon: 'fa fa-coins',
                     background: 'aqua',
                     action: function(env){
+                        $rootScope.$broadcast('autoActionModal', env.vm, 'start debit');
                     }
                 },
                 {
@@ -46,6 +47,24 @@ function subOptions($rootScope, envelopeFactory){
                     background: 'red',
                     action: function(env){
                         envelopeFactory.deleteEnvelope(env.vm)
+                    }
+                },
+                {
+                    text: 'auto credit list',
+                    id: 'option_six',
+                    icon: 'fas fa-hand-holding-usd',
+                    background: 'pink',
+                    action: function(env){
+                        $rootScope.$broadcast('showCreditOrDebit', env.vm, 'credit');
+                    }
+                },
+                {
+                    text: 'auto debit list',
+                    id: 'option_seven',
+                    icon: 'fas fa-hand-holding-usd',
+                    background: 'purple',
+                    action: function(env){
+                        $rootScope.$broadcast('showCreditOrDebit', env.vm, 'debit');
                     }
                 }
             ],

@@ -1,21 +1,22 @@
 -- SCHEMA DELETE
 	DROP TABLE IF EXISTS envelopes CASCADE;
 	DROP TABLE IF EXISTS history CASCADE;
-	DROP FUNCTION IF EXISTS TransferBalance(FromAccountId INT, ToAccountId INT, Amount NUMERIC(7,2));
+	DROP TABLE IF EXISTS autocredit CASCADE;
+	DROP TABLE IF EXISTS autodebit CASCADE;
+	DROP FUNCTION IF EXISTS TransferBalance(FromAccountId INT, ToAccountId INT, Amount NUMERIC(8,2));
 -- ENVELOPES
 	CREATE TABLE IF NOT EXISTS envelopes
 	(
 		id serial primary key
 		, title_value varchar
-		, amount_value numeric(7,2)
+		, amount_value numeric(8,2)
 		, visible boolean
 		, color_r int
 		, color_g int
 		, color_b int
-		, creditRecursionDate int
-		, creditRecursionAmount numeric(7,2)
-		, debitRecursionDate int
-		, debitRecursionAmount numeric(7,2)
+		, lastCreditDay int
+		, lastDebitDay int
+		, today int
 	);
 	INSERT INTO envelopes
     (
@@ -25,24 +26,24 @@
         color_r, 
         color_g, 
         color_b,
-		creditRecursionDate,
-		creditRecursionAmount,
-		debitRecursionDate,
-		debitRecursionAmount
+		lastCreditDay,
+		lastDebitDay,
+		today
     )
     VALUES
-    ('Master Balance', 0, false, null, null, null, null, null, null, null)
+    ('Master Balance', 0, false, null, null, null, null, null, null)
 	;
+-- HISTORY
 	CREATE TABLE IF NOT EXISTS history
 	(
 		id serial primary key
 		, description varchar
-		, amount numeric(7,2)
+		, amount numeric(8,2)
 		, from_title varchar
 		, "date" date
 	);
 
-	CREATE FUNCTION TransferBalance (FromAccountId INT, ToAccountId INT, Amount NUMERIC(7,2))
+	CREATE FUNCTION TransferBalance (FromAccountId INT, ToAccountId INT, Amount NUMERIC(8,2))
 	RETURNS VOID AS $$
 	BEGIN
 		UPDATE envelopes
@@ -59,4 +60,25 @@
 	END;
 	$$
 	LANGUAGE plpgsql;
+
+-- AUTO CREDIT
+	CREATE TABLE IF NOT EXISTS autocredit
+	(
+		id serial primary key
+		, envelopeid int
+		, amount numeric(8,2)
+		, dayofmonth int
+		, description varchar
+		, fromEnvelopeid int
+	);
+
+-- AUTO DEBIT
+	CREATE TABLE IF NOT EXISTS autodebit
+	(
+		id serial primary key
+		, envelopeid int
+		, amount numeric(8,2)
+		, dayofmonth int
+		, description varchar
+	);
 

@@ -60,6 +60,38 @@ function store(){
                 return $http.delete('/api/deleteHistory?id=' + id);
             }
 
+            function createCredit (transPayload, envelope) {
+                return $http.post('/api/createCredit', transPayload);
+            }
+
+            function createDebit (transPayload, envelope) {
+                return $http.post('/api/createDebit', transPayload);
+            }
+
+            function getCredits (){
+                return $http.get('/api/credits');
+            }
+
+            function getDebits (){
+                return $http.get('/api/debits');
+            }
+
+            function getCreditsByEnvId (id){
+                return $http.get('/api/getCreditsByEnvId/?id=' + id);
+            }
+          
+            function getDebitsByEnvId (id){
+                return $http.get('/api/getDebitsByEnvId/?id=' + id);
+            }
+
+            function deleteCreditById (id) {
+                return $http.delete('/api/deleteCredit/?id=' + id);
+            }
+
+            function deleteDebitById (id) {
+                return $http.delete('/api/deleteDebit/?id=' + id);
+            }
+
             return {
                 data: data,
                 resetAll:resetAll,
@@ -69,7 +101,15 @@ function store(){
                 transferBalance:transferBalance,
                 createHistory:createHistory,
                 getHistory:getHistory,
-                deleteHistory:deleteHistory
+                deleteHistory:deleteHistory,
+                createCredit:createCredit,
+                getCredits:getCredits,
+                getCreditsByEnvId:getCreditsByEnvId,
+                deleteCreditById:deleteCreditById,
+                createDebit:createDebit,
+                getDebitsByEnvId:getDebitsByEnvId,
+                getDebits:getDebits,
+                deleteDebitById:deleteDebitById
             }
         }
     }

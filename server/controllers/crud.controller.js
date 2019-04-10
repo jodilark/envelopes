@@ -17,10 +17,9 @@ exports.create = (req, res) => {
                 rb.color.r,
                 rb.color.g,
                 rb.color.b,
-                rb.creditrecursiondate,
-                rb.creditrecursionamount,
-                rb.debitrecursiondate,
-                rb.debitrecursionamount
+                rb.lastCreditDay,
+                rb.lastDebitDay,
+                rb.today
             ];
             if(rb.color.r > 255 || rb.color.g > 255 || rb.color.b > 255){
                 res.status(400).send('color value cannot be greater than 255');
@@ -38,6 +37,10 @@ exports.envelope = (req, res) => {
 exports.getEnvelopes = (req, res) => req.app.get('db').envelopeGetAll().then(response => res.status(200).send(response)).catch(err => res.status(400).send('there was an error getting the envelope list'));
 // UPDATE
 exports.updateEnvelope = (req, res) => {
+    if(req.query && req.query.payload){
+        req.body = JSON.parse(req.query.payload);
+        req.query.id = req.body.id;
+    }
     let rq = req.query, rb = req.body;
     req.app.get('db').envelopeGet(rq.id).then(response => {
         let env = response[0],
@@ -49,10 +52,9 @@ exports.updateEnvelope = (req, res) => {
             color_r = (rb.color_r === env.color_r || !rb.color_r ? env.color_r: rb.color_r),
             color_g = (rb.color_g === env.color_g || !rb.color_g ? env.color_g: rb.color_g),
             color_b = (rb.color_b === env.color_b || !rb.color_b ? env.color_b: rb.color_b),
-            creditrecursiondate = (rb.creditrecursiondate === env.creditrecursiondate || !rb.creditrecursiondate ? env.creditrecursiondate: rb.creditrecursiondate),
-            creditrecursionamount = (rb.creditrecursionamount === env.creditrecursionamount || !rb.creditrecursionamount ? env.creditrecursionamount: rb.creditrecursionamount),
-            debitrecursiondate = (rb.debitrecursiondate === env.debitrecursiondate || !rb.debitrecursiondate ? env.debitrecursiondate: rb.debitrecursiondate),
-            debitrecursionamount = (rb.debitrecursionamount === env.debitrecursionamount || !rb.debitrecursionamount ? env.debitrecursionamount: rb.debitrecursionamount)
+            lastCreditDay = rb.lastCreditDay,
+            lastDebitDay = rb.lastDebitDay,
+            today = rb.today
         ];
         if(rb.color_r > 255 || rb.color_g > 255 || rb.color_b > 255){
             res.status(400).send('color_r value cannot be greater than 255');
@@ -60,6 +62,9 @@ exports.updateEnvelope = (req, res) => {
     }).catch(err => res.status(400).send(`there was an error getting this envelope ${err}`));
 };
 exports.transferBalance = (req, res) => {
+    if(req.query && req.query.payload){
+        req.body = req.query.payload.split(',');
+    }
     // [FromAccountId, ToAccountId, Amount]
     req.app.get('db').transferBalance(req.body['0'], req.body['1'], req.body['2']).then(response => res.status(200).send('transaction complete')).catch(err => res.status(400).send(`Transaction did not complete: ${err}`));
 }

@@ -2,12 +2,16 @@
     <content>
         <section id="env-actions-modal-wrapper">
             <header>
-                {{aa.originEnvelope.title_value}} Auto Credit
+                {{aa.originEnvelope.title_value}} Auto {{transType}}
             </header>
-            <form id="{{formId}}" name="{{formId}}" ng-submit="submit()">
+            <form id="{{formId}}" name="{{formId}}" ng-submit="submit()" autocomplete="off">
                 <article>
-                    <input type="number" ng-model="dayOfMonth" min="0" max="28" name="dayOfMonth" placeholder="Calendar Day" required/>
+                    <input type="number" ng-model="dayOfMonth" min="0" max="28" name="dayOfMonth" placeholder="Calendar Day" required autofocus/>
                     <input type="number" step="0.01" ng-model="amount" name="amount" placeholder="0.00" required/>
+                    <input type="text" ng-model="transDescription" name="transDescription" placeholder="description" required/>
+                    <select ng-if="list" ng-model="fromEnvelope" ng-options="envelope.title_value + ':     ' + envelope.amount_value for envelope in list" required name="fromEnvelope" ng-change="onChange(fromEnvelope)">
+                        <option value="">----- From -----</option>
+                    </select>
                 </article>
                 <article>
                     <button type="submit">{{aa.type}}</button>

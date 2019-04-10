@@ -12,10 +12,9 @@ function envelopeFactory($q, balances, store, $http, notification){
                 g: Math.floor(Math.random() * Math.floor(255)),
                 b: Math.floor(Math.random() * Math.floor(255))
             };
-            this.creditRecursionDate = null;
-            this.creditRecursionAmount = 0.00;
-            this.debitRecursionDate = null;
-            this.debitRecursionAmount = 0.00;
+            this.lastCreditDay = null;
+            this.lastDebitDay = null;
+            this.today = new Date().getDate();
         }
 
         formData(){
