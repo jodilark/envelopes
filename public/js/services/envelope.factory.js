@@ -14,8 +14,7 @@ function envelopeFactory($q, balances, store, $http, notification){
             };
             this.lastCreditDay = null;
             this.lastDebitDay = null;
-            this.creditDay = new Date().getDate();
-            this.debitDay = null;
+            this.today = new Date().getDate();
         }
 
         formData(){

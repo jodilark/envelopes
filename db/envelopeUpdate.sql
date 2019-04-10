@@ -7,7 +7,6 @@ SET title_value = $2
 , color_b = $7
 , lastCreditDay = $8
 , lastDebitDay = $9
-, creditday = $10
-, debitday = $11
+, today = $10
 WHERE id = $1
 ;

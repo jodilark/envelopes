@@ -1,4 +1,4 @@
-UPDATE envelopes SET creditday = $1 RETURNING *;
+UPDATE envelopes SET today = $1 RETURNING *;
 
 UPDATE envelopes
 SET lastCreditDay = null

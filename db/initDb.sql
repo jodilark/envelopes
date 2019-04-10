@@ -3,21 +3,20 @@
 	DROP TABLE IF EXISTS history CASCADE;
 	DROP TABLE IF EXISTS autocredit CASCADE;
 	DROP TABLE IF EXISTS autodebit CASCADE;
-	DROP FUNCTION IF EXISTS TransferBalance(FromAccountId INT, ToAccountId INT, Amount NUMERIC(7,2));
+	DROP FUNCTION IF EXISTS TransferBalance(FromAccountId INT, ToAccountId INT, Amount NUMERIC(8,2));
 -- ENVELOPES
 	CREATE TABLE IF NOT EXISTS envelopes
 	(
 		id serial primary key
 		, title_value varchar
-		, amount_value numeric(7,2)
+		, amount_value numeric(8,2)
 		, visible boolean
 		, color_r int
 		, color_g int
 		, color_b int
 		, lastCreditDay int
 		, lastDebitDay int
-		, creditDay int
-		, debitDay int
+		, today int
 	);
 	INSERT INTO envelopes
     (
@@ -29,23 +28,22 @@
         color_b,
 		lastCreditDay,
 		lastDebitDay,
-		creditDay,
-		debitDay
+		today
     )
     VALUES
-    ('Master Balance', 0, false, null, null, null, null, null, null, null)
+    ('Master Balance', 0, false, null, null, null, null, null, null)
 	;
 -- HISTORY
 	CREATE TABLE IF NOT EXISTS history
 	(
 		id serial primary key
 		, description varchar
-		, amount numeric(7,2)
+		, amount numeric(8,2)
 		, from_title varchar
 		, "date" date
 	);
 
-	CREATE FUNCTION TransferBalance (FromAccountId INT, ToAccountId INT, Amount NUMERIC(7,2))
+	CREATE FUNCTION TransferBalance (FromAccountId INT, ToAccountId INT, Amount NUMERIC(8,2))
 	RETURNS VOID AS $$
 	BEGIN
 		UPDATE envelopes
@@ -68,7 +66,7 @@
 	(
 		id serial primary key
 		, envelopeid int
-		, amount numeric(7,2)
+		, amount numeric(8,2)
 		, dayofmonth int
 		, description varchar
 		, fromEnvelopeid int
@@ -79,10 +77,8 @@
 	(
 		id serial primary key
 		, envelopeid int
-		, amount numeric(7,2)
+		, amount numeric(8,2)
 		, dayofmonth int
 		, description varchar
 	);
 
--- select autocredit.id, autocredit.amount, autocredit.dayofmonth, autocredit.description, envelopes.id as envid, envelopes.creditDay from autocredit inner join envelopes on autocredit .envelopeid = envelopes.id where envelopes.creditday = autocredit.dayofmonth
--- update envelopes set creditday = 13 where id = 2 returning *

@@ -1,5 +1,9 @@
 //CREATE
 exports.addHistoryRow = (req, res) => {
+    if(req.query && req.query.payload){
+        req.body = JSON.parse(req.query.payload);
+    }
+
     let lineItem = [
         req.body.from_title,
         req.body.description,

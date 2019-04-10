@@ -5,8 +5,8 @@ autocredit.dayofmonth,
 autocredit.description,
 autocredit.fromEnvelopeid, 
 envelopes.id AS envid, 
-envelopes.creditDay 
+envelopes.today 
 FROM autocredit 
 INNER JOIN envelopes ON autocredit .envelopeid = envelopes.id 
-WHERE envelopes.creditday = autocredit.dayofmonth 
+WHERE envelopes.today = autocredit.dayofmonth 
 ;

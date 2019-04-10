@@ -48,12 +48,43 @@ m = minutes,
 h = hours,
 d = days
 */
-// cron.schedule(1, 'h', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
-// cron.schedule(24, 'h', autoTransaction.intSetTodayOnEnvelopes, 'setEnvelopeDay');
-// setTimeout(function(){
-//   cron.stop('autoCredit')
-// }, 30000);
+var currentMinute, dailyCronStarted;
+(function startCron () {
+  checkForNewDay();
+  dailyCronStarted = setInterval(function(){
+    currentMinute = new Date().getMinutes();
+    // console.log(currentMinute); // for debugging
+    setTimeout(function(){
+      checkForNewDay();
+    }, 10000);
+  }, 60000);
+})();
 
+function checkForNewDay () {
+  let currentHour = new Date().getHours();
+  if(currentHour === 1 && currentMinute === 0){
+    runDailyCrons();
+  }
+}
+
+function runDailyCrons () {
+  console.log('starting daily crons');
+  clearInterval(dailyCronStarted);
+  cron.schedule(24, 'h', autoTransaction.intSetTodayOnEnvelopes, 'setEnvelopeDay');
+  dailyCronStarted = null;
+}
+
+//////////////
+// CRON JOBS
+setTimeout(function() {
+  autoTransaction.intSetTodayOnEnvelopes()
+},5000);
+setTimeout(function() {
+  cron.schedule(1, 'h', autoTransaction.checkEnvelopesForCredits, 'autoCredit');
+}, 1000);
+setTimeout(function(){
+  cron.schedule(1, 'h', autoTransaction.checkEnvelopesForDebits, 'autoDebit');
+},2000);
 
 //AUTOTRANSACTION CREDIT
 app.post('/api/createCredit', autoTransaction.createCredit);
@@ -67,12 +98,18 @@ app.delete('/api/deleteCredit', autoTransaction.deleteCredit);
 // this should run every day to update the date on the envelopes
 app.put('/api/setTodayOnEnvelopes', autoTransaction.setTodayOnEnvelopes);
 app.get('/api/updateEnvelopeCreditDay', autoTransaction.updateEnvelopeCreditDay);
+app.get('/api/updateEnvelopeDebitDay', autoTransaction.updateEnvelopeDebitDay);
 
 //AUTOTRANSACTION DEBIT
 app.post('/api/createDebit', autoTransaction.createDebit);
-app.get('/api/getDebitsByEnvId', autoTransaction.getDebitsByEnvId);
 app.get('/api/debits', autoTransaction.debits);
+app.get('/api/getDebitsByEnvId', autoTransaction.getDebitsByEnvId);
 app.delete('/api/deleteDebit', autoTransaction.deleteDebit);
+app.get('/api/todaysDebits', autoTransaction.todaysDebits);
+app.get('/api/debitPurchase', autoTransaction.debitPurchase);
+
+//temporary
+app.get('/api/temporary', autoTransaction.checkEnvelopesForDebits);
 
 
 
