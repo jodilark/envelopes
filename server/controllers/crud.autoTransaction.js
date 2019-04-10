@@ -1,5 +1,7 @@
 const request = require('request');
 const _ = require('lodash');
+const config = require('../../config');
+const port = config.appPort;
 
 ///////////////////////////////
 // CREDIT SETUP AND MANAGEMENT
@@ -68,7 +70,7 @@ exports.setTodayOnEnvelopes = (req, res) => { //external
 exports.intSetTodayOnEnvelopes = (req, res) => { //internal
     request({
         method: 'PUT',
-        url: 'http://localhost:3000/api/setTodayOnEnvelopes'
+        url: 'http://localhost:' + port + '/api/setTodayOnEnvelopes'
     });
 }
 
@@ -96,7 +98,7 @@ exports.checkEnvelopesForCredits = () => {
             if(envelope.lastcreditday !== today && envelope.title_value !== 'Master Balance'){
                 console.log('checking pending credit for: ', envelope.title_value);
                 request.get({
-                    url: 'http://localhost:3000/api/todaysCredits'
+                    url: 'http://localhost:' + port + '/api/todaysCredits'
                     }, function(error, response, body){
                         let rb = JSON.parse(response.body);
                         if(rb.length >= 1){
@@ -116,7 +118,7 @@ exports.checkEnvelopesForCredits = () => {
                 request(
                     {
                         method: 'GET',
-                        url: 'http://localhost:3000/api/creditTransfer/?payload=' + payload.toString()
+                        url: 'http://localhost:' + port + '/api/creditTransfer/?payload=' + payload.toString()
                     }, function(error, response, body){
                         console.log('credited: ', envelope.title_value);
                         //now set last credited day on envelope with todays date
@@ -132,14 +134,14 @@ exports.checkEnvelopesForCredits = () => {
         request.get(
             {
                 method: 'GET',
-                url: 'http://localhost:3000/api/updateEnvelopeCreditDay/?id=' + envelopeId
+                url: 'http://localhost:' + port + '/api/updateEnvelopeCreditDay/?id=' + envelopeId
             }
         );
     }
 
     request({
         method: 'GET',
-        url: 'http://localhost:3000/api/getEnvelopes'
+        url: 'http://localhost:' + port + '/api/getEnvelopes'
         }, function(error, response, body){
             let rb = JSON.parse(response.body);
             checkForPendingCredit(rb);
@@ -179,12 +181,12 @@ exports.debitPurchase = (req, res) => {
     return request(
         {
             method: 'POST',
-            url: 'http://localhost:3000/api/createHistory/?payload=' + historyObj
+            url: 'http://localhost:' + port + '/api/createHistory/?payload=' + historyObj
         }, function(error, response, body){
             return request(
                 {
                     method: 'PUT',
-                    url: 'http://localhost:3000/api/updateEnvelope?payload=' + envData
+                    url: 'http://localhost:' + port + '/api/updateEnvelope?payload=' + envData
                 }, function(error, response, body){
                     return body;
                 }
@@ -202,7 +204,7 @@ exports.checkEnvelopesForDebits = () => {
             if(envelope.lastdebitday !== today && envelope.title_value !== 'Master Balance'){
                 console.log('checking pending debit for: ', envelope.title_value);
                 return request.get({
-                    url: 'http://localhost:3000/api/todaysDebits'
+                    url: 'http://localhost:' + port + '/api/todaysDebits'
                     }, function(error, response, body){
                         let rb = JSON.parse(response.body);
                         if(rb.length >= 1){
@@ -224,7 +226,7 @@ exports.checkEnvelopesForDebits = () => {
                 return request(
                     {
                         method: 'GET',
-                        url: 'http://localhost:3000/api/debitPurchase/?payload=' + payload
+                        url: 'http://localhost:' + port + '/api/debitPurchase/?payload=' + payload
                     }, function(error, response, body){
                         console.log('debited: ', debitEnvelope.title_value);
                         return
@@ -240,7 +242,7 @@ exports.checkEnvelopesForDebits = () => {
 
     request({
         method: 'GET',
-        url: 'http://localhost:3000/api/getEnvelopes'
+        url: 'http://localhost:' + port + '/api/getEnvelopes'
         }, function(error, response, body){
             let rb = JSON.parse(response.body);
             checkForPendingDebit(rb);
