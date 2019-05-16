@@ -8,7 +8,8 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "massive": "^5.5.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "tar": ">=4.4.8"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -20,7 +21,8 @@
     "gulp-print": "^5.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.1"
+    "gulp-uglify": "^3.0.1",
+    "tar": ">=4.4.8"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
